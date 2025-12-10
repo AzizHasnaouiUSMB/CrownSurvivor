@@ -20,7 +20,7 @@
                 <ImageBrush ImageSource="/image/button.png"/>
             </Button.OpacityMask>
         </Button>
-        <Button x:Name="butPara" Content="PARAMETRES" HorizontalAlignment="Center" Margin="0,265,0,0" VerticalAlignment="Top" Height="72" Width="114">
+        <Button x:Name="butPara" Content="PARAMETRES" HorizontalAlignment="Center" Margin="0,265,0,0" VerticalAlignment="Top" Height="72" Width="114" Click="butPara_Click">
             <Button.Background>
                 <ImageBrush ImageSource="/image/button.png"/>
             </Button.Background>

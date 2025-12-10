@@ -79,6 +79,11 @@ namespace CrownSurvivor
             return sprites;
         }
 
+        private void butPara_Click(object sender, RoutedEventArgs e)
+        {
+            UCReglesJeu reglesJeuUC = new UCReglesJeu();
 
+            //this.ConteneurDynamique.Content = reglesJeuUC;
+        }
     }
 }
