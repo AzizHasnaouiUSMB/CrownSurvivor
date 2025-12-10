@@ -24,7 +24,7 @@ namespace CrownSurvivor
             InitializeComponent();
         }
 
-        private void ButRetourRegle_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             UCReglesJeu uc = new UCReglesJeu();
 
