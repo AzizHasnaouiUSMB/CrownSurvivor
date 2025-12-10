@@ -1,0 +1,24 @@
+﻿<Window x:Class="CrownSurvivor.UCReglesJeu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CrownSurvivor"
+        mc:Ignorable="d"
+        Title="UCReglesJeu" Height="450" Width="800">
+    <Window.Background>
+        <ImageBrush ImageSource="/BackgroundRegles.png"/>
+    </Window.Background>
+    <Grid>
+        <TextBlock HorizontalAlignment="Center" Width="542" Height="322" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="16" FontWeight="Bold" Margin="0,28,0,0">
+           Le jeu CrownSurvivor est un survivor qui consiste à essayer de survivre aux plus de vagues possibles, vous entrez donc dans le rôle d’un preux roi qui essaye de protéger sa couronne de monstres zombies qui veulent la lui voler.
+            Les vagues dureront 44 secondes et toutes les trois vagues vous aurez le droit à un modificateur pour booster vos capacités.
+            Pour réussir à accomplir votre quête, vous aurez la possibilité de tirer une couronne dotée de pouvoir magique parmi les 6 du royaume, vous aurez donc accès a : <LineBreak/> <LineBreak/> -	Une vitesse de déplacement augmentée <LineBreak/> -	Des dégâts augmentés <LineBreak/> -	Une vitesse de tir plus rapide <LineBreak/> -	Un effet de recul sur les zombies <LineBreak/> -	Des dégâts de zone <LineBreak/> -	Un tir chanceux qui permet de one shot un ennemie de façon aléatoire
+        </TextBlock>
+        <Button Content="Retour" HorizontalAlignment="Center" Margin="0,330,0,0" VerticalAlignment="Top" Height="104" Width="100" Foreground="#FFEDCEA0" Click="Button_Click" >
+            <Button.Background>
+                <ImageBrush ImageSource="/image/BoutonFond.png"/>
+            </Button.Background>
+        </Button>
+    </Grid>
+</Window>
