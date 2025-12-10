@@ -7,6 +7,34 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/image/camino-bosque-arboles-rocas-ilustracion-dibujos-animados_145644-83237.jpg"/>
+        </Grid.Background>
 
+        <Image Margin="174,10,174,205" Source="/image/télécharger (1).png" Stretch="Fill"/>
+        <Button Content="JOUER" HorizontalAlignment="Center" Margin="0,234,0,0" VerticalAlignment="Top" Height="72" Width="114">
+            <Button.Background>
+                <ImageBrush ImageSource="/image/button.png"/>
+            </Button.Background>
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/image/button.png"/>
+            </Button.OpacityMask>
+        </Button>
+        <Button Content="PARAMETRES" HorizontalAlignment="Center" Margin="0,265,0,0" VerticalAlignment="Top" Height="72" Width="114">
+            <Button.Background>
+                <ImageBrush ImageSource="/image/button.png"/>
+            </Button.Background>
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/image/button.png"/>
+            </Button.OpacityMask>
+        </Button>
+        <Button Content="QUITTER" HorizontalAlignment="Center" Margin="0,296,0,0" VerticalAlignment="Top" Height="72" Width="114">
+            <Button.Background>
+                <ImageBrush ImageSource="/image/button.png"/>
+            </Button.Background>
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/image/button.png"/>
+            </Button.OpacityMask>
+        </Button>
     </Grid>
 </Window>
