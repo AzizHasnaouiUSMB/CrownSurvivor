@@ -6,46 +6,7 @@
         xmlns:local="clr-namespace:CrownSurvivor"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/image/camino-bosque-arboles-rocas-ilustracion-dibujos-animados_145644-83237.jpg"/>
-        </Grid.Background>
-
-        <Image Margin="174,10,174,205" Source="/image/télécharger (1).png" Stretch="Fill"/>
-        <Button x:Name="butJouer" Content="JOUER" HorizontalAlignment="Center" Margin="0,234,0,0" VerticalAlignment="Top" Height="72" Width="114">
-            <Button.Background>
-                <ImageBrush ImageSource="/image/button.png"/>
-            </Button.Background>
-            <Button.OpacityMask>
-                <ImageBrush ImageSource="/image/button.png"/>
-            </Button.OpacityMask>
-        </Button>
-        <Button x:Name="butPara" Content="PARAMETRES" HorizontalAlignment="Center" Margin="0,265,0,0" VerticalAlignment="Top" Height="72" Width="114">
-            <Button.Background>
-                <ImageBrush ImageSource="/image/button.png"/>
-            </Button.Background>
-            <Button.OpacityMask>
-                <ImageBrush ImageSource="/image/button.png"/>
-            </Button.OpacityMask>
-        </Button>
-        <Button x:Name="butQuitter" Content="QUITTER" HorizontalAlignment="Center" Margin="0,296,0,0" VerticalAlignment="Top" Height="72" Width="114">
-            <Button.Background>
-                <ImageBrush ImageSource="/image/button.png"/>
-            </Button.Background>
-            <Button.OpacityMask>
-                <ImageBrush ImageSource="/image/button.png"/>
-            </Button.OpacityMask>
-        </Button>
-        <StackPanel Margin="10,301,648,10">
-            <Button x:Name="butTirage" Content="TIRAGE" HorizontalAlignment="Left" Margin="10,362,0,0" VerticalAlignment="Top" Height="72" Width="114" Click="butTirage_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="/image/button.png"/>
-                </Button.Background>
-                <Button.OpacityMask>
-                    <ImageBrush ImageSource="/image/button.png"/>
-                </Button.OpacityMask>
-            </Button>
-            <Image x:Name="ResultImage" Width="64" Height="64" Margin="35,305,701,65"/>
-        </StackPanel>
-    </Grid>
+    
+    <ContentControl x:Name="ZoneJeu" />
+    
 </Window>

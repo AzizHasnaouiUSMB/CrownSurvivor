@@ -20,11 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="BackgroundRegles.png" />
     <Resource Include="image\BoutonFond.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="BackgroundRegles.png" />
     <Resource Include="image\1000_F_758844498_ycE31oc1g5EpnL3yOqNKY8No8PfUwYs3.jpg" />
     <Resource Include="image\BackgroundRegles.png" />
     <Resource Include="image\button.png" />

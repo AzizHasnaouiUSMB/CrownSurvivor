@@ -17,68 +17,46 @@ namespace CrownSurvivor
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Random random = new Random();
-        private List<BitmapImage> tirableSprites;
-        private static readonly string[] SpriteFileNames =
-        {
-            "Im1.png",
-            "Im2.png",
-            "Im3.png",
-            "Im4.png",
-            "Im5.png",
-            "Im6.png"
-        };
 
         public MainWindow()
         {
             InitializeComponent();
-            // 1. Charger toutes les images au démarrage
-            tirableSprites = LoadAllSprites();
-
-            // Afficher une image par défaut au début
-            if (tirableSprites.Count > 0)
-            {
-                ResultImage.Source = tirableSprites[0];
-            }
+            AfficheDemarrage();
         }
-
-        private void butTirage_Click(object sender, RoutedEventArgs e)
+        private void AfficheDemarrage()
         {
-            if (tirableSprites.Count > 0)
-            {
-                int randomIndex = random.Next(0, tirableSprites.Count);
+            // crée et charge l'écran de démarrage
+            UCDemarrage uc = new UCDemarrage();
 
-                ResultImage.Source = tirableSprites[randomIndex];
-            }
-            else
-            {
-                MessageBox.Show("Aucun sprite n'a pu être chargé pour le tirage.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+            // associe l'écran au conteneur
+            ZoneJeu.Content = uc;
+            uc.butQuitter.Click += Quitter;
+            uc.butRegles.Click += AfficherRegles;
+            uc.butPara.Click += AfficherPara;
         }
-        private List<BitmapImage> LoadAllSprites()
+
+        private void Quitter(object sender, RoutedEventArgs e)
         {
-            var sprites = new List<BitmapImage>();
-
-            foreach (string fileName in SpriteFileNames)
-            {
-                try
-                {
-                    // URI pour charger une ressource (l'image intégrée)
-                    // Le chemin est relatif au dossier du projet.
-                    Uri uri = new Uri($"/{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name};component/{fileName}", UriKind.Relative);
-
-                    BitmapImage image = new BitmapImage(uri);
-                    sprites.Add(image);
-                }
-                catch (Exception ex)
-                {
-                    // Gérer les erreurs de chargement si un fichier est manquant
-                    MessageBox.Show($"Erreur lors du chargement de l'image {fileName}: {ex.Message}", "Erreur de chargement", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            return sprites;
+            Close();
         }
 
+        private void AfficherPara(object sender, RoutedEventArgs e)
+        {
+            UCParametres uc = new UCParametres();
+            ZoneJeu.Content = uc;
+            uc.butRetourPara.Click += RetourVersDemarrage;
+        }
 
+        private void AfficherRegles(object sender, RoutedEventArgs e)
+        {
+            UCRegles uc = new UCRegles();
+            ZoneJeu.Content = uc;
+            uc.butRetourRegles.Click += RetourVersDemarrage;
+        }
+
+        private void RetourVersDemarrage(object sender, RoutedEventArgs e)
+        {
+            AfficheDemarrage();
+        }
     }
 }

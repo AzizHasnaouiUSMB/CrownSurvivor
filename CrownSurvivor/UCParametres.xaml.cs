@@ -10,25 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace CrownSurvivor
 {
     /// <summary>
-    /// Logique d'interaction pour UCReglesJeu.xaml
+    /// Logique d'interaction pour UCParametres.xaml
     /// </summary>
-    public partial class UCReglesJeu : Window
+    public partial class UCParametres : UserControl
     {
-        public UCReglesJeu()
+        public UCParametres()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            UCReglesJeu uc = new UCReglesJeu();
-
-
         }
     }
 }
