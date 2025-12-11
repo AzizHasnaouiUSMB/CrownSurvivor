@@ -33,6 +33,14 @@ namespace CrownSurvivor
             uc.butQuitter.Click += Quitter;
             uc.butRegles.Click += AfficherRegles;
             uc.butPara.Click += AfficherPara;
+            uc.butJouer.Click += AfficherJeu;
+        }
+
+        private void AfficherJeu(object sender, RoutedEventArgs e)
+        {
+            UCJeu uc = new UCJeu();
+            ZoneJeu.Content = uc;
+            uc.butRetourJeu.Click += RetourVersDemarrage;
         }
 
         private void Quitter(object sender, RoutedEventArgs e)

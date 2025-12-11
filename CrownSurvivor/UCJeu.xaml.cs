@@ -12,17 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 namespace CrownSurvivor
 {
     /// <summary>
-    /// Logique d'interaction pour UCRegles.xaml
+    /// Logique d'interaction pour UCJeu.xaml
     /// </summary>
-    public partial class UCRegles : UserControl
+    public partial class UCJeu : UserControl
     {
-        public UCRegles()
+        public UCJeu()
         {
             InitializeComponent();
         }
-
     }
 }
