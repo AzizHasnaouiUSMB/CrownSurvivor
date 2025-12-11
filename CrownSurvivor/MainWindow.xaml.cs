@@ -34,6 +34,7 @@ namespace CrownSurvivor
             uc.butRegles.Click += AfficherRegles;
             uc.butPara.Click += AfficherPara;
             uc.butJouer.Click += AfficherJeu;
+            uc.butTirageP.Click += AffichageTirage;
         }
 
         private void AfficherJeu(object sender, RoutedEventArgs e)
@@ -66,5 +67,12 @@ namespace CrownSurvivor
         {
             AfficheDemarrage();
         }
+        private void AffichageTirage(object sender, RoutedEventArgs e)
+        {
+            UCTirage uc = new UCTirage();
+            ZoneJeu.Content = uc;
+        }
+
+
     }
 }
