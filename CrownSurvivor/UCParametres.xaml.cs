@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace CrownSurvivor
 {
     /// <summary>
-    /// Logique d'interaction pour UCRegles.xaml
+    /// Logique d'interaction pour UCParametres.xaml
     /// </summary>
-    public partial class UCRegles : UserControl
+    public partial class UCParametres : UserControl
     {
-        public UCRegles()
+        public UCParametres()
         {
             InitializeComponent();
         }
-
     }
 }

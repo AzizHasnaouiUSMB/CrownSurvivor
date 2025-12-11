@@ -30,14 +30,33 @@ namespace CrownSurvivor
 
             // associe l'écran au conteneur
             ZoneJeu.Content = uc;
+            uc.butQuitter.Click += Quitter;
             uc.butRegles.Click += AfficherRegles;
+            uc.butPara.Click += AfficherPara;
+        }
+
+        private void Quitter(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void AfficherPara(object sender, RoutedEventArgs e)
+        {
+            UCParametres uc = new UCParametres();
+            ZoneJeu.Content = uc;
+            uc.butRetourPara.Click += RetourVersDemarrage;
         }
 
         private void AfficherRegles(object sender, RoutedEventArgs e)
         {
             UCRegles uc = new UCRegles();
             ZoneJeu.Content = uc;
+            uc.butRetourRegles.Click += RetourVersDemarrage;
         }
 
+        private void RetourVersDemarrage(object sender, RoutedEventArgs e)
+        {
+            AfficheDemarrage();
+        }
     }
 }
