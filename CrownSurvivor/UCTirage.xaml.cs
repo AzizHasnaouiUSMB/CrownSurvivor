@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace CrownSurvivor
@@ -18,10 +18,8 @@ namespace CrownSurvivor
     /// <summary>
     /// Logique d'interaction pour UCTirage.xaml
     /// </summary>
-  
-public partial class UCTirage : Window
+    public partial class UCTirage : UserControl
     {
-        
         private static readonly string[] Sprite =
        {
             "Im1.png",
@@ -44,7 +42,8 @@ public partial class UCTirage : Window
             string imagePath = "Images/" + fileName;
             Uri imageUri = new Uri(imagePath, UriKind.Relative);
             BitmapImage bitmap = new BitmapImage(imageUri);
-            //imgPerso.Source = Sprite[TiragePers];;
+            imgPerso.Source = bitmap;
         }
+        
     }
 }
