@@ -20,7 +20,7 @@
                 <ImageBrush ImageSource="/image/BoutonFond.png"/>
             </Button.Background>
             <Button.OpacityMask>
-                <ImageBrush ImageSource="/image/button.png"/>
+                <ImageBrush ImageSource="/image/BoutonFond.png"/>
             </Button.OpacityMask>
         </Button>
     </Grid>

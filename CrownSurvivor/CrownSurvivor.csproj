@@ -14,8 +14,14 @@
     <None Remove="image\BoutonFond.png" />
     <None Remove="image\button.png" />
     <None Remove="image\camino-bosque-arboles-rocas-ilustracion-dibujos-animados_145644-83237.jpg" />
+    <None Remove="image\istockphoto-1077687716-612x612.jpg" />
     <None Remove="image\télécharger %281%29.png" />
-    <None Remove="image\téléchargé.png" />
+    <None Remove="ImPerso\Im1.png" />
+    <None Remove="ImPerso\Im2.png" />
+    <None Remove="ImPerso\Im3.png" />
+    <None Remove="ImPerso\Im4.png" />
+    <None Remove="ImPerso\Im5.png" />
+    <None Remove="ImPerso\Im6.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,8 +33,14 @@
     <Resource Include="image\BackgroundRegles.png" />
     <Resource Include="image\button.png" />
     <Resource Include="image\camino-bosque-arboles-rocas-ilustracion-dibujos-animados_145644-83237.jpg" />
+    <Resource Include="image\istockphoto-1077687716-612x612.jpg" />
     <Resource Include="image\télécharger (1).png" />
-    <Resource Include="image\téléchargé.png" />
+    <Resource Include="ImPerso\Im1.png" />
+    <Resource Include="ImPerso\Im2.png" />
+    <Resource Include="ImPerso\Im3.png" />
+    <Resource Include="ImPerso\Im4.png" />
+    <Resource Include="ImPerso\Im5.png" />
+    <Resource Include="ImPerso\Im6.png" />
   </ItemGroup>
 
 </Project>
