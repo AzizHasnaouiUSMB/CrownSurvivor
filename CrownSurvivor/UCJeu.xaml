@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CrownSurvivor"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" KeyDown="UCJeu_KeyDown"
+             d:DesignHeight="450" d:DesignWidth="800" KeyDown="UCJeu_KeyDown" KeyUp="UCJeu_KeyUp"
              Focusable="True">
     <Grid>
         <Grid.Background>
@@ -20,7 +20,7 @@
                 <ImageBrush ImageSource="/image/button.png"/>
             </Button.OpacityMask>
         </Button>
-        <Canvas x:Name="zoneJeu" >
+        <Canvas x:Name="zoneJeu">
             <Image x:Name="Perso" Source="/ImPerso/Im1.png" Stretch="Fill" Canvas.Left="382" Canvas.Top="198" Height="54" Width="36" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         </Canvas>
     </Grid>
