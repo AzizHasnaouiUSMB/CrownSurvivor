@@ -46,6 +46,9 @@ namespace CrownSurvivor
             Uri path = new Uri($"pack://application:,,,{Chemin}");
             BitmapImage bitmap = new BitmapImage(path);
             imgPerso.Source = bitmap;
+
+
+            butTirage.IsEnabled = false; //Empeche de recliquer
         }
 
 
