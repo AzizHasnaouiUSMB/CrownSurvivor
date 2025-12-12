@@ -11,7 +11,7 @@
             <ImageBrush ImageSource="/image/BackgroundRegles.png"/>
         </Grid.Background>
 
-        <Button x:Name="butRetourPara" Content="RETOUR" HorizontalAlignment="Center" Margin="0,350,0,0" VerticalAlignment="Top" Height="77" Width="100" Foreground="#FFE6C18A">
+        <Button x:Name="butRetourPara" Content="RETOUR" HorizontalAlignment="Center" Margin="0,357,0,0" VerticalAlignment="Top" Height="40" Width="90" Foreground="#FFE6C18A">
             <Button.Background>
                 <ImageBrush ImageSource="/image/BoutonFond.png"/>
             </Button.Background>
@@ -19,6 +19,18 @@
                 <ImageBrush ImageSource="/image/button.png"/>
             </Button.OpacityMask>
         </Button>
+
+        <Slider x:Name="slidVitesse" Width="350" Height="25" Minimum="1"
+         Maximum="100"
+         Value="50"
+         TickFrequency="1"
+         IsSnapToTickEnabled="True"
+         AutoToolTipPlacement="BottomRight"
+         HorizontalAlignment="Center" Margin="0,132,0,293"  />
+
+        <Label Content="Parametres" HorizontalAlignment="Center" Margin="0,53,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+        <Label Content="Son :" HorizontalAlignment="Left" Margin="167,120,0,0" VerticalAlignment="Top" FontSize="20"/>
+
 
     </Grid>
 </UserControl>

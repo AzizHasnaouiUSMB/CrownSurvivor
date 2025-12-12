@@ -15,7 +15,7 @@
         Les vagues dureront 44 secondes et toutes les trois vagues vous aurez le droit à un modificateur pour booster vos capacités.
         Pour réussir à accomplir votre quête, vous aurez la possibilité de tirer une couronne dotée de pouvoir magique parmi les 6 du royaume, vous aurez donc accès a : <LineBreak/> <LineBreak/> -	Une vitesse de déplacement augmentée <LineBreak/> -	Des dégâts augmentés <LineBreak/> -	Une vitesse de tir plus rapide <LineBreak/> -	Un effet de recul sur les zombies <LineBreak/> -	Des dégâts de zone <LineBreak/> -	Un tir chanceux qui permet de one shot un ennemie de façon aléatoire
         </TextBlock>
-        <Button x:Name="butRetourRegles" Content="RETOUR" HorizontalAlignment="Center" Margin="0,350,0,0" VerticalAlignment="Top" Height="77" Width="100" Foreground="#FFE6C18A">
+        <Button x:Name="butRetourRegles" Content="RETOUR" HorizontalAlignment="Center" Margin="0,367,0,0" VerticalAlignment="Top" Height="40" Width="90" Foreground="#FFE6C18A">
             <Button.Background>
                 <ImageBrush ImageSource="/image/BoutonFond.png"/>
             </Button.Background>

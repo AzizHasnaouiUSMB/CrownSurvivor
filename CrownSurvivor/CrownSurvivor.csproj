@@ -10,13 +10,12 @@
 
   <ItemGroup>
     <None Remove="BackgroundRegles.png" />
-    <None Remove="image\1000_F_758844498_ycE31oc1g5EpnL3yOqNKY8No8PfUwYs3.jpg" />
     <None Remove="image\BackgroundRegles.png" />
     <None Remove="image\BoutonFond.png" />
     <None Remove="image\button.png" />
     <None Remove="image\camino-bosque-arboles-rocas-ilustracion-dibujos-animados_145644-83237.jpg" />
     <None Remove="image\télécharger %281%29.png" />
-    <None Remove="image\télécharger.png" />
+    <None Remove="image\téléchargé.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,12 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="image\1000_F_758844498_ycE31oc1g5EpnL3yOqNKY8No8PfUwYs3.jpg" />
     <Resource Include="image\BackgroundRegles.png" />
     <Resource Include="image\button.png" />
     <Resource Include="image\camino-bosque-arboles-rocas-ilustracion-dibujos-animados_145644-83237.jpg" />
     <Resource Include="image\télécharger (1).png" />
-    <Resource Include="image\télécharger.png" />
+    <Resource Include="image\téléchargé.png" />
   </ItemGroup>
 
 </Project>

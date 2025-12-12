@@ -16,21 +16,13 @@ using System.Windows.Shapes;
 namespace CrownSurvivor
 {
     /// <summary>
-    /// Logique d'interaction pour UCDemarrage.xaml
+    /// Logique d'interaction pour UCJeu.xaml
     /// </summary>
-    public partial class UCDemarrage : UserControl
+    public partial class UCJeu : UserControl
     {
-        public UCDemarrage()
+        public UCJeu()
         {
             InitializeComponent();
         }
-
-        private void butPara_Click(object sender, RoutedEventArgs e)
-        {
-            UCRegles reglesJeuUC = new UCRegles();
-
-            //this.ConteneurDynamique.Content = reglesJeuUC; ??
-        }
-
     }
 }

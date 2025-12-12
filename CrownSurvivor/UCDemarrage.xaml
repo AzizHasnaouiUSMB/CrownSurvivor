@@ -13,7 +13,7 @@
         </Grid.Background>
 
         <Image Margin="174,10,174,205" Source="/image/télécharger (1).png" Stretch="Fill"/>
-        <Button x:Name="butJouer" Content="JOUER" HorizontalAlignment="Center" Margin="0,234,0,0" VerticalAlignment="Top" Height="72" Width="114">
+        <Button x:Name="butJouer" Content="JOUER" HorizontalAlignment="Center" Margin="0,243,0,0" VerticalAlignment="Top" Height="40" Width="90">
             <Button.Background>
                 <ImageBrush ImageSource="/image/button.png"/>
             </Button.Background>
@@ -21,7 +21,7 @@
                 <ImageBrush ImageSource="/image/button.png"/>
             </Button.OpacityMask>
         </Button>
-        <Button x:Name="butPara" Content="PARAMETRES" HorizontalAlignment="Center" Margin="0,265,0,0" VerticalAlignment="Top" Height="72" Width="114" Click="butPara_Click">
+        <Button x:Name="butPara" Content="PARAMETRES" HorizontalAlignment="Center" Margin="0,294,0,0" VerticalAlignment="Top" Height="40" Width="90" Click="butPara_Click">
             <Button.Background>
                 <ImageBrush ImageSource="/image/button.png"/>
             </Button.Background>
@@ -29,7 +29,7 @@
                 <ImageBrush ImageSource="/image/button.png"/>
             </Button.OpacityMask>
         </Button>
-        <Button x:Name="butQuitter" Content="QUITTER" HorizontalAlignment="Center" Margin="0,296,0,0" VerticalAlignment="Top" Height="72" Width="114">
+        <Button x:Name="butQuitter" Content="QUITTER" HorizontalAlignment="Center" Margin="0,341,0,0" VerticalAlignment="Top" Height="40" Width="90">
             <Button.Background>
                 <ImageBrush ImageSource="/image/button.png"/>
             </Button.Background>
@@ -37,7 +37,7 @@
                 <ImageBrush ImageSource="/image/button.png"/>
             </Button.OpacityMask>
         </Button>
-        <Button x:Name="butRegles" Content="REGLES" HorizontalAlignment="Left" Margin="637,332,0,0" VerticalAlignment="Top" Height="72" Width="114">
+        <Button x:Name="butRegles" Content="REGLES" HorizontalAlignment="Left" Margin="647,341,0,0" VerticalAlignment="Top" Height="40" Width="90">
             <Button.Background>
                 <ImageBrush ImageSource="/image/button.png"/>
             </Button.Background>
@@ -45,16 +45,13 @@
                 <ImageBrush ImageSource="/image/button.png"/>
             </Button.OpacityMask>
         </Button>
-        <StackPanel Margin="10,301,648,10">
-            <Button x:Name="butTirage" Content="TIRAGE" HorizontalAlignment="Left" Margin="10,362,0,0" VerticalAlignment="Top" Height="72" Width="114" Click="butTirage_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="/image/button.png"/>
-                </Button.Background>
-                <Button.OpacityMask>
-                    <ImageBrush ImageSource="/image/button.png"/>
-                </Button.OpacityMask>
-            </Button>
-            <Image x:Name="ResultImage" Width="64" Height="64" Margin="35,305,701,65"/>
-        </StackPanel>
+        <Button x:Name="butTirageP" Content="TIRAGE" HorizontalAlignment="Center" Margin="0,386,0,0" VerticalAlignment="Top" Height="40" Width="90">
+            <Button.Background>
+                <ImageBrush ImageSource="/image/button.png"/>
+            </Button.Background>
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/image/button.png"/>
+            </Button.OpacityMask>
+        </Button>
     </Grid>
 </UserControl>
