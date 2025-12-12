@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="BackgroundRegles.png" />
+    <None Remove="image\backgroundjeu.png" />
     <None Remove="image\BackgroundRegles.png" />
     <None Remove="image\BoutonFond.png" />
     <None Remove="image\button.png" />
@@ -20,6 +21,7 @@
 
   <ItemGroup>
     <Resource Include="BackgroundRegles.png" />
+    <Resource Include="image\backgroundjeu.png" />
     <Resource Include="image\BoutonFond.png" />
   </ItemGroup>
 

@@ -44,7 +44,7 @@ public partial class UCTirage : Window
             string imagePath = "Images/" + fileName;
             Uri imageUri = new Uri(imagePath, UriKind.Relative);
             BitmapImage bitmap = new BitmapImage(imageUri);
-            //imgPerso.Source = bitmap;
+            //imgPerso.Source = Sprite[TiragePers];;
         }
     }
 }
