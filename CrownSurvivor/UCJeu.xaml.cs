@@ -24,28 +24,35 @@ namespace CrownSurvivor
     /// </summary>
     public partial class UCJeu : UserControl
     {
-        private double vitesse = 200; //pixels par seconde
-        private bool gauche, droite, haut, bas; // Indiquent si la touche correspondante est actuellement enfoncée.
-        private readonly Stopwatch chrono = new Stopwatch();
+        private Random random = new Random();
+        private int enemieSurLeTerrain = 0;
+        private int damage = 0;
+        private int score = 0;
+
+        private double vitesseEnemie = 2;
+        private double vitesse = 5;
+
+        // Indiquent si la touche correspondante est actuellement enfoncée.
+        private bool gauche, droite, haut, bas;
+
         private readonly DispatcherTimer timer;
+
         public UCJeu()
         {
             InitializeComponent();
 
+            // Position de départ du perso
             Canvas.SetLeft(Perso, 100);
             Canvas.SetTop(Perso, 100);
-            //Place le personnage à sa position de départ (coordonnées 100, 100) sur le Canvas. 
-            //SetLeft contrôle la position horizontale, SetTop la verticale.
+
+            // Focus clavier
             this.Loaded += (s, e) => this.Focus();
-            //Quand le UserControl est chargé et affiché, on lui donne le focus clavier.
-            //Sinon, les événements KeyDown / KeyUp n’arriveraient pas dans UCJeu_KeyDown / UCJeu_KeyUp.​
+
+            // Boucle de jeu
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(20); // ~50 fois par seconde
             timer.Tick += Timer_Tick;
-            chrono.Start();
             timer.Start();
-
-
         }
 
         private void UCJeu_KeyDown(object sender, KeyEventArgs e)
@@ -54,8 +61,6 @@ namespace CrownSurvivor
             if (e.Key == Key.D) droite = true;
             if (e.Key == Key.Z) haut = true;
             if (e.Key == Key.S) bas = true;
-
-
         }
 
         private void UCJeu_KeyUp(object sender, KeyEventArgs e)
@@ -68,20 +73,30 @@ namespace CrownSurvivor
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            // temps écoulé depuis le dernier tick (en secondes)
-            double dt = chrono.Elapsed.TotalSeconds;
-            chrono.Restart();
-
             double x = Canvas.GetLeft(Perso);
             double y = Canvas.GetTop(Perso);
 
-            if (gauche) x -= vitesse * dt;
-            if (droite) x += vitesse * dt;
-            if (haut) y -= vitesse * dt;
-            if (bas) y += vitesse * dt;
+            // déplacement fixe à chaque tick
+            if (gauche) x -= vitesse;
+            if (droite) x += vitesse;
+            if (haut) y -= vitesse;
+            if (bas) y += vitesse;
 
             Canvas.SetLeft(Perso, x);
             Canvas.SetTop(Perso, y);
         }
-    }
+
+        private void Enemie_Spawn()
+        { ImageBrush enemiesprite = new ImageBrush();
+
+            enemieSurLeTerrain = random.Next(1, 6);
+
+            switch (enemieSurLeTerrain)
+            { 
+
+
+            } 
+        } 
+    } 
 }
+    
