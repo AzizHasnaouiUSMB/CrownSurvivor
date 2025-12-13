@@ -41,7 +41,7 @@ namespace CrownSurvivor
         {
             UCTirage uc = new UCTirage();
             ZoneJeu.Content = uc;
-            //uc.butTirage.Click += RetourVersDemarrage;
+            uc.butJouer.Click += AfficherJeu;
         }
 
         private void AfficherJeu(object sender, RoutedEventArgs e)

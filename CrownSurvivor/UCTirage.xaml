@@ -15,7 +15,16 @@
         <TextBlock TextAlignment="center" HorizontalAlignment="Center" Margin="0,132,0,0" TextWrapping="Wrap" Text="Acceptez les choses auxquelles le destin vous lie..." VerticalAlignment="Top" Width="208" Foreground="#FFD0D0D0" FontFamily="Vivaldi" FontSize="20"/>
 
 
-        <Button x:Name="butTirage" Content="TIRAGE"  Foreground="White" Margin="314,351,314,10" Height="40" Width="90" Click="butTirage_Click">
+        <Button x:Name="butTirage" Content="TIRAGE" HorizontalAlignment="Center" Margin="0,347,0,0" VerticalAlignment="Top" Height="40" Width="90" Foreground="#FFFFFF" Click="butTirage_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/image/BoutonFond.png"/>
+            </Button.Background>
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/image/BoutonFond.png"/>
+            </Button.OpacityMask>
+        </Button>
+
+        <Button x:Name="butJouer" Content="JOUER" HorizontalAlignment="Center" Margin="0,347,0,0" VerticalAlignment="Top" Height="40" Width="90" Foreground="#FFFFFF">
             <Button.Background>
                 <ImageBrush ImageSource="/image/BoutonFond.png"/>
             </Button.Background>

@@ -29,6 +29,10 @@ namespace CrownSurvivor
         public UCTirage()
         {
             InitializeComponent();
+            butJouer.IsEnabled = false;
+            butJouer.Visibility = Visibility.Hidden;
+            butTirage.Visibility = Visibility.Visible;
+
         }
 
         private void butTirage_Click(object sender, RoutedEventArgs e)
@@ -39,6 +43,8 @@ namespace CrownSurvivor
             //    persos[i] = new BitmapImage(path);
             //}
 
+            
+
             int numeroImage = random.Next(1, Sprite.Length+1);
             Console.WriteLine(numeroImage);
             string Chemin = $"/ImPerso/im{numeroImage}.png";
@@ -46,7 +52,16 @@ namespace CrownSurvivor
             Uri path = new Uri($"pack://application:,,,{Chemin}");
             BitmapImage bitmap = new BitmapImage(path);
             imgPerso.Source = bitmap;
+
+            butTirage.IsEnabled = false;
+            butJouer.IsEnabled = true;
+            butTirage.Visibility= Visibility.Hidden;
+            butJouer.Visibility = Visibility.Visible;
+            
         }
+
+
+
 
 
 
