@@ -63,7 +63,7 @@ namespace CrownSurvivor
             butTirage.Visibility = Visibility.Hidden;
             butJouer.Visibility = Visibility.Visible;
 
-            description.Text = TabDescription[numeroImage];
+            description.Text = TabDescription[numeroImage-1];
             
         }
 
