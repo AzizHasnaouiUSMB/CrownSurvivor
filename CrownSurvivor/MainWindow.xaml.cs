@@ -39,9 +39,9 @@ namespace CrownSurvivor
 
         private void AfficherTirrage(object sender, RoutedEventArgs e)
         {
-            UCTirage uc = new UCTirage();
-            ZoneJeu.Content = uc;
-            uc.butJouer.Click += AfficherJeu;
+            _ucTirage = new UCTirage();            // << on mémorise l’instance
+            ZoneJeu.Content = _ucTirage;
+            _ucTirage.butJouer.Click += AfficherJeu;
         }
 
         private void AfficherJeu(object sender, RoutedEventArgs e)
