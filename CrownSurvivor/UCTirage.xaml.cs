@@ -24,6 +24,17 @@ namespace CrownSurvivor
     {
         private static readonly BitmapImage[] Sprite = new BitmapImage[6];
 
+        private static readonly string[] TabDescription =
+            [
+                "Vitesse de déplacement : le personnage se déplace 20% plus vite que d'habitude",
+                "Dégâts augmentés : les projectiles infligent +20% de dégats ",
+                "Vitesse de tir : la vitesse des projectiles 20% plus rapide",
+                "Tir chanceux (One-Shot) : un projectile à 1% de chance de tuer un ennemi instantanément",
+                "Dégâts de zone : La hitbox du projectile est 50% plus grosse ",
+                "Ralentissement : chaque ennemi toucher à ça vitesse diminuer de 20%",
+            ];
+
+
     private readonly Random random = new Random();
 
         public UCTirage()
@@ -47,8 +58,10 @@ namespace CrownSurvivor
 
             butTirage.IsEnabled = false;
             butJouer.IsEnabled = true;
-            butTirage.Visibility= Visibility.Hidden;
+            butTirage.Visibility = Visibility.Hidden;
             butJouer.Visibility = Visibility.Visible;
+
+            description.Text = TabDescription[numeroImage];
             
         }
 
