@@ -37,8 +37,6 @@ namespace CrownSurvivor
 
         private void butTirage_Click(object sender, RoutedEventArgs e)
         {
-
-
             int numeroImage = random.Next(1, Sprite.Length+1);
             Console.WriteLine(numeroImage);
             string Chemin = $"/ImPerso/im{numeroImage}.png";
