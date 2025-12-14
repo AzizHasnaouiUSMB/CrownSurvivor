@@ -38,13 +38,7 @@ namespace CrownSurvivor
 
         private void butTirage_Click(object sender, RoutedEventArgs e)
         {
-            //for (int i = 0; i < persos.Length; i++)
-            //{
-            //    Uri path = new Uri($"pack://application:,,,/images/newRunner_0{i + 1}.gif");
-            //    persos[i] = new BitmapImage(path);
-            //}
 
-            
 
             int numeroImage = random.Next(1, Sprite.Length+1);
             NumeroImageTiree = numeroImage;
@@ -61,22 +55,6 @@ namespace CrownSurvivor
             butJouer.Visibility = Visibility.Visible;
             
         }
-
-
-
-
-
-
-
-        //private void butTiragePerso_Click(object sender, RoutedEventArgs e)
-        //{
-        //    int TiragePers = random.Next(Sprite.Length);
-        //    string fileName = Sprite[TiragePers];
-        //    string imagePath = "Images/" + fileName;
-        //    Uri imageUri = new Uri(imagePath, UriKind.Relative);
-        //    BitmapImage bitmap = new BitmapImage(imageUri);
-        //    imgPerso.Source = bitmap;
-        //}
 
     }
 }
