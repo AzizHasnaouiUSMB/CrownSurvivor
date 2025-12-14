@@ -24,5 +24,7 @@ namespace CrownSurvivor
         {
             InitializeComponent();
         }
+
+        
     }
 }
