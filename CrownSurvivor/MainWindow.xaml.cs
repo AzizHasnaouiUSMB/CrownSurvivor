@@ -17,7 +17,7 @@ namespace CrownSurvivor
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        private UCTirage _ucTirage;
         public MainWindow()
         {
             InitializeComponent();
@@ -46,7 +46,15 @@ namespace CrownSurvivor
 
         private void AfficherJeu(object sender, RoutedEventArgs e)
         {
-            UCJeu uc = new UCJeu();
+            int numero = 1; // valeur par défaut si pas passé par tirage
+
+            // si on vient de UCTirage, on récupère NumeroImageTiree
+            if (_ucTirage != null)
+            {
+                numero = _ucTirage.NumeroImageTiree;
+            }
+
+            UCJeu uc = new UCJeu(numero);          // on passe le numéro ici
             ZoneJeu.Content = uc;
             uc.butRetourJeu.Click += RetourVersDemarrage;
         }
@@ -75,7 +83,6 @@ namespace CrownSurvivor
             AfficheDemarrage();
         }
 
-
-
+            
     }
 }

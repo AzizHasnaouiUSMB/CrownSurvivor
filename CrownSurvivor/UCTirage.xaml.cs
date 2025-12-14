@@ -22,9 +22,10 @@ namespace CrownSurvivor
     public partial class UCTirage : UserControl
 
     {
-        private static readonly BitmapImage[] Sprite = new BitmapImage[6];
+    private static readonly BitmapImage[] Sprite = new BitmapImage[6];
 
     private readonly Random random = new Random();
+    public int NumeroImageTiree { get; private set; }
 
         public UCTirage()
         {
@@ -46,6 +47,7 @@ namespace CrownSurvivor
             
 
             int numeroImage = random.Next(1, Sprite.Length+1);
+            NumeroImageTiree = numeroImage;
             Console.WriteLine(numeroImage);
             string Chemin = $"/ImPerso/im{numeroImage}.png";
             Console.WriteLine(Chemin);
