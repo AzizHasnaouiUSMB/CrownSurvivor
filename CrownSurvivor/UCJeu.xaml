@@ -21,7 +21,7 @@
             </Button.OpacityMask>
         </Button>
         <Canvas x:Name="zoneJeu">
-            <Image x:Name="Perso" Source="/ImPerso/Im1.png" Stretch="Fill" Canvas.Left="382" Canvas.Top="198" Height="54" Width="36" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Image x:Name="imgPerso" Source="/ImPerso/Im1.png" Stretch="Fill" Canvas.Left="382" Canvas.Top="198" Height="54" Width="36" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         </Canvas>
     </Grid>
 </UserControl>

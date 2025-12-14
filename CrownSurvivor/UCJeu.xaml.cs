@@ -28,22 +28,33 @@ namespace CrownSurvivor
         private int enemieSurLeTerrain = 0;
         private int damage = 0;
         private int score = 0;
-
         private double vitesseEnemie = 2;
         private double vitesse = 5;
-
         // Indiquent si la touche correspondante est actuellement enfoncée.
         private bool gauche, droite, haut, bas;
-
         private readonly DispatcherTimer timer;
 
-        public UCJeu()
-        {
+
+
+        const int STAT_PV = 0;
+        const int STAT_ATTAQUE = 1;
+        const int STAT_DEFENSE = 2;
+        const int STAT_VITESSE = 3;
+        const int NB_STATS = 4;
+
+        double[] stats = new double[NB_STATS];
+
+        private int _numeroImage;
+
+        public UCJeu(int numeroImage)
+        {   
             InitializeComponent();
+            _numeroImage = numeroImage;
+           
 
             // Position de départ du perso
-            Canvas.SetLeft(Perso, 100);
-            Canvas.SetTop(Perso, 100);
+            Canvas.SetLeft(imgPerso, 100);
+            Canvas.SetTop(imgPerso, 100);
 
             // Focus clavier
             this.Loaded += (s, e) => this.Focus();
@@ -53,6 +64,13 @@ namespace CrownSurvivor
             timer.Interval = TimeSpan.FromMilliseconds(20); // ~50 fois par seconde
             timer.Tick += Timer_Tick;
             timer.Start();
+
+            string Chemin = $"/ImPerso/im{_numeroImage}.png";
+            Console.WriteLine(Chemin);
+            Uri path = new Uri($"pack://application:,,,{Chemin}");
+            BitmapImage bitmap = new BitmapImage(path);
+            imgPerso.Source = bitmap;
+            stats = Personnage(_numeroImage);
         }
 
         private void UCJeu_KeyDown(object sender, KeyEventArgs e)
@@ -73,8 +91,8 @@ namespace CrownSurvivor
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            double x = Canvas.GetLeft(Perso);
-            double y = Canvas.GetTop(Perso);
+            double x = Canvas.GetLeft(imgPerso);
+            double y = Canvas.GetTop(imgPerso);
 
             // déplacement fixe à chaque tick
             if (gauche) x -= vitesse;
@@ -82,8 +100,8 @@ namespace CrownSurvivor
             if (haut) y -= vitesse;
             if (bas) y += vitesse;
 
-            Canvas.SetLeft(Perso, x);
-            Canvas.SetTop(Perso, y);
+            Canvas.SetLeft(imgPerso, x);
+            Canvas.SetTop(imgPerso, y);
         }
 
         private void Enemie_Spawn()
@@ -91,12 +109,51 @@ namespace CrownSurvivor
 
             enemieSurLeTerrain = random.Next(1, 6);
 
-            switch (enemieSurLeTerrain)
-            { 
+        }
+
+        public double[] Personnage(int _numeroImage)
+        {
+            double[] stats = new double[4];  // PV, Attaque, Défense, Vitesse
+
+            stats[0] = 100;   // PV
+            stats[1] = 10;    // Attaque
+            stats[2] = 5;     // Défense
+            stats[3] = 3;     // Vitesse
+
+            if (_numeroImage == 1)
+            {
+                stats[3] = stats[3] * 1.20;
+            }
+
+            else if (_numeroImage == 2)
+            {
+                stats[1] = stats[1] * 1.20;
+            }
+
+            else if (_numeroImage == 3)
+            {
+
+            }
+
+            else if (_numeroImage == 4)
+            {
 
 
-            } 
-        } 
-    } 
+            }
+
+            else if (_numeroImage == 5)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            return stats;
+        }
+
+
+    }
 }
     
