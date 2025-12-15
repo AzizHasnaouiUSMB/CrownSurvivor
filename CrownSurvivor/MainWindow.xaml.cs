@@ -29,15 +29,7 @@ namespace CrownSurvivor
         {
             InitializeComponent();
             AfficheDemarrage();
-            sonTest.MediaOpened += SonTest_MediaOpened;
             InitSon();
-        }
-
-        private void SonTest_MediaOpened(object sender, EventArgs e)
-        {
-            // C'est ici que vous pouvez vous assurer que tout est prêt
-            // Si vous le souhaitez, vous pouvez déclencher un message de confirmation ici
-            // MessageBox.Show("Le son a été chargé et est prêt à être joué.");
         }
 
         private void AfficheDemarrage()
