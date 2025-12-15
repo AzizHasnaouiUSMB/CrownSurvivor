@@ -17,8 +17,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
+using System.Windows.Threading;
+//rajout 
+
 namespace CrownSurvivor
-{
+{   
     /// <summary>
     /// Logique d'interaction pour UCJeu.xaml
     /// </summary>
