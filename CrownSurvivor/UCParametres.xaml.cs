@@ -26,6 +26,7 @@ namespace CrownSurvivor
         public UCParametres()
         {
             InitializeComponent();
+            butRetrecirEcran.Visibility = Visibility.Hidden;
         }
 
         public void butTestSon_Click(object sender, RoutedEventArgs e)
@@ -38,6 +39,18 @@ namespace CrownSurvivor
         {
             MainWindow.nivSon = slidSon.Value / 100;
             MainWindow.SetVolumeMusique();
+        }
+
+        private void butGrandEcran_Click(object sender, RoutedEventArgs e)
+        {
+            butRetrecirEcran.Visibility = Visibility.Visible;
+            butGrandEcran.Visibility = Visibility.Hidden;
+        }
+
+        private void butRetrecirEcran_Click(object sender, RoutedEventArgs e)
+        {
+            butGrandEcran.Visibility= Visibility.Visible;
+            butRetrecirEcran.Visibility = Visibility.Hidden;
         }
     }
 }

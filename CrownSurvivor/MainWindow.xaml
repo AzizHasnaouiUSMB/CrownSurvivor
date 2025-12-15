@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:CrownSurvivor"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    
-    <ContentControl x:Name="ZoneJeu" />
-    
+
+    <Viewbox Stretch="Uniform">
+        <ContentControl x:Name="ZoneJeu"
+                        Width="800"
+                        Height="450"/>
+    </Viewbox>
+
 </Window>
