@@ -20,16 +20,18 @@
             </Button.OpacityMask>
         </Button>
 
-        <Slider x:Name="slidVitesse" Width="350" Height="25" Minimum="1"
-         Maximum="100"
-         Value="50"
-         TickFrequency="1"
-         IsSnapToTickEnabled="True"
-         AutoToolTipPlacement="BottomRight"
-         HorizontalAlignment="Center" Margin="0,132,0,293"  />
-
+        
         <Label Content="Parametres" HorizontalAlignment="Center" Margin="0,53,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
         <Label Content="Son :" HorizontalAlignment="Left" Margin="167,120,0,0" VerticalAlignment="Top" FontSize="20"/>
+
+        <StackPanel>
+            <Slider x:Name="slidSon" Width="350" Height="25" Minimum="1"
+             Maximum="100"
+             Value="50"
+             TickFrequency="1"
+             IsSnapToTickEnabled="True"
+             HorizontalAlignment="Center" Margin="20,132,0,293"/>
+        </StackPanel>
 
 
     </Grid>
