@@ -86,7 +86,7 @@ namespace CrownSurvivor
         private void JouerSon(object sender, RoutedEventArgs e)
         {
             sonTest.Volume = nivSon;
-            Console.WriteLine(nivSon *10);
+            Console.WriteLine(nivSon *100);
             sonTest.Position = TimeSpan.Zero;
             sonTest.Play();
             
@@ -106,8 +106,7 @@ namespace CrownSurvivor
 
         private void InitSon()
         {
-
-            sonTest.Open(new Uri("sons/TestSon.wav", UriKind.Relative));
+            sonTest.Open(new Uri("sons/SonTest.wav", UriKind.Relative));
         }
     }
 }
