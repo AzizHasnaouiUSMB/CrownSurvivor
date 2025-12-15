@@ -31,11 +31,13 @@ namespace CrownSurvivor
         public void butTestSon_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.nivSon = slidSon.Value / 100;
+            MainWindow.SetVolumeMusique();
         }
 
         private void butRetourPara_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.nivSon = slidSon.Value / 100;
+            MainWindow.SetVolumeMusique();
         }
     }
 }

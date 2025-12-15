@@ -25,6 +25,16 @@
     <None Remove="ImPerso\Im4.png" />
     <None Remove="ImPerso\Im5.png" />
     <None Remove="ImPerso\Im6.png" />
+    <None Remove="sons\MusiqueFondJeu.mp3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="sons\MusiqueFondAccueil.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sons\MusiqueFondJeu.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

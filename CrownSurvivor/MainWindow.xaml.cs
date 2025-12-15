@@ -25,7 +25,7 @@ namespace CrownSurvivor
 
         private MediaPlayer sonTest = new MediaPlayer();
         private UCTirage _ucTirage;
-        public static double nivSon;
+        public static double nivSon = 0.5;
         private static MediaPlayer musique;
 
         public MainWindow()
@@ -33,7 +33,7 @@ namespace CrownSurvivor
             InitializeComponent();
             AfficheDemarrage();
             InitSon();
-            InitMusique();
+            InitMusiqueAccueil();
         }
 
         private void AfficheDemarrage()
@@ -69,7 +69,17 @@ namespace CrownSurvivor
 
             UCJeu uc = new UCJeu(numero);          // on passe le numéro ici
             ZoneJeu.Content = uc;
-            uc.butRetourJeu.Click += RetourVersDemarrage;
+            uc.butRetourJeu.Click += RetourDemarragePlusMusique;
+
+            InitMusiqueJeu();
+        }
+
+        private void RetourDemarragePlusMusique(object sender, RoutedEventArgs e)
+        {
+            musique.Stop();
+            InitMusiqueAccueil();
+            AfficheDemarrage();
+            
         }
 
         private void Quitter(object sender, RoutedEventArgs e)
@@ -83,6 +93,7 @@ namespace CrownSurvivor
             ZoneJeu.Content = uc;
             uc.butRetourPara.Click += RetourVersDemarrage;
             uc.butTestSon.Click += JouerSon;
+            uc.slidSon.Value = nivSon;
         }
 
         private void JouerSon(object sender, RoutedEventArgs e)
@@ -104,6 +115,7 @@ namespace CrownSurvivor
         private void RetourVersDemarrage(object sender, RoutedEventArgs e)
         {
             AfficheDemarrage();
+            InitMusiqueAccueil();
         }
 
         private void InitSon()
@@ -111,20 +123,37 @@ namespace CrownSurvivor
             sonTest.Open(new Uri("sons/SonTest.wav", UriKind.Relative));
         }
 
-        private void InitMusique()
+        private void InitMusiqueAccueil()
         {
             musique = new MediaPlayer();
-            musique.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory +
-           "sons/MusiqueFondAccueil.mp3"));
+            musique.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "sons/MusiqueFondAccueil.mp3"));
             musique.MediaEnded += RelanceMusique;
             musique.Volume = nivSon;
             musique.Play();
+            Console.WriteLine("Okay");
         }
+
+        private void InitMusiqueJeu()
+        {
+            musique.Stop();
+            musique = new MediaPlayer();
+            musique.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "sons/MusiqueFondJeu.mp3"));
+            musique.MediaEnded += RelanceMusique;
+            musique.Volume = nivSon;
+            musique.Play();
+            Console.WriteLine("Paff");
+        }
+
         private void RelanceMusique(object? sender, EventArgs e)
         {
             musique.Position = TimeSpan.Zero;
             musique.Play();
         }
 
+        public static void SetVolumeMusique()
+        {
+            if (musique != null)
+                musique.Volume = nivSon;
+        }
     }
 }
