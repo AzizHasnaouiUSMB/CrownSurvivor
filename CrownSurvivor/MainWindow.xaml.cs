@@ -87,7 +87,6 @@ namespace CrownSurvivor
             ZoneJeu.Content = uc;
             uc.butRetourPara.Click += RetourVersDemarrage;
             uc.butTestSon.Click += JouerSon;
-            //uc.slidSon
         }
 
         private void JouerSon(object sender, RoutedEventArgs e)
@@ -111,10 +110,7 @@ namespace CrownSurvivor
         private void InitSon()
         {
                 
-            //MusicPlayer.Open(new Uri("pack://application:,,,/sons/TestSon.wav", UriKind.Relative));
             
-
-        }
 
 
 
