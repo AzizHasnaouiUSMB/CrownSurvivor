@@ -25,6 +25,13 @@
     <None Remove="ImPerso\Im4.png" />
     <None Remove="ImPerso\Im5.png" />
     <None Remove="ImPerso\Im6.png" />
+    <None Remove="sons\SonTest.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="sons\SonTest.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
