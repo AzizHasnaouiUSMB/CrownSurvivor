@@ -44,7 +44,9 @@
     <Resource Include="ImPerso\Im4.png" />
     <Resource Include="ImPerso\Im5.png" />
     <Resource Include="ImPerso\Im6.png" />
-    <Content Include="sons\TestSon.wav" />
+    <Content Include="sons\TestSon.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

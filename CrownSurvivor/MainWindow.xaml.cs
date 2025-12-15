@@ -109,10 +109,7 @@ namespace CrownSurvivor
 
         private void InitSon()
         {
-                
-            
-
-
-
+            sonTest.Open(new Uri("sons/TestSon.wav", UriKind.Relative));
+        }
     }
 }
