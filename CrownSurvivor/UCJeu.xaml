@@ -9,7 +9,7 @@
              Focusable="True">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/image/backgroundjeu.png" Stretch="Uniform"/>
+            <ImageBrush ImageSource="/image/background.jpg" Stretch="Uniform"/>
         </Grid.Background>
 
         <Button x:Name="butRetourJeu" Content="RETOUR" HorizontalAlignment="Left" Margin="700,0,0,0" VerticalAlignment="Top" Height="40" Width="90" Foreground="#FFE6C18A">
@@ -20,7 +20,7 @@
                 <ImageBrush ImageSource="/image/button.png"/>
             </Button.OpacityMask>
         </Button>
-        <Canvas x:Name="zoneJeu">
+        <Canvas x:Name="ZoneJeu">
             <Image x:Name="imgPerso" Source="/ImPerso/Im1.png" Stretch="Fill" Canvas.Left="382" Canvas.Top="198" Height="54" Width="36" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         </Canvas>
     </Grid>

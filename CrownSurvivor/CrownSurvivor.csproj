@@ -10,11 +10,13 @@
 
   <ItemGroup>
     <None Remove="BackgroundRegles.png" />
+    <None Remove="image\background.jpg" />
     <None Remove="image\backgroundjeu.png" />
     <None Remove="image\BackgroundRegles.png" />
     <None Remove="image\BoutonFond.png" />
     <None Remove="image\button.png" />
     <None Remove="image\camino-bosque-arboles-rocas-ilustracion-dibujos-animados_145644-83237.jpg" />
+    <None Remove="image\ImZombie.png" />
     <None Remove="image\istockphoto-1077687716-612x612.jpg" />
     <None Remove="image\télécharger %281%29.png" />
     <None Remove="ImPerso\Im1.png" />
@@ -27,6 +29,7 @@
 
   <ItemGroup>
     <Resource Include="BackgroundRegles.png" />
+    <Resource Include="image\background.jpg" />
     <Resource Include="image\backgroundjeu.png" />
     <Resource Include="image\BoutonFond.png" />
   </ItemGroup>
@@ -35,6 +38,7 @@
     <Resource Include="image\BackgroundRegles.png" />
     <Resource Include="image\button.png" />
     <Resource Include="image\camino-bosque-arboles-rocas-ilustracion-dibujos-animados_145644-83237.jpg" />
+    <Resource Include="image\ImZombie.png" />
     <Resource Include="image\istockphoto-1077687716-612x612.jpg" />
     <Resource Include="image\télécharger (1).png" />
     <Resource Include="ImPerso\Im1.png" />

@@ -31,7 +31,6 @@ namespace CrownSurvivor
         private int enemieSurLeTerrain = 0;
         private int damage = 0;
         private int score = 0;
-        private double vitesseEnemie = 2;
         private double vitesse = 5;
         // Indiquent si la touche correspondante est actuellement enfoncée.
         private bool gauche, droite, haut, bas;
@@ -49,11 +48,15 @@ namespace CrownSurvivor
 
         private int _numeroImage;
 
+        private List<Image> enemies = new List<Image>();
+        private double enemySpeed = 2;
+        private int enemySpawnCounter = 0;
+        private int enemySpawnInterval = 50; // nombre de ticks entre 2 spawns
         public UCJeu(int numeroImage)
         {   
             InitializeComponent();
             _numeroImage = numeroImage;
-           
+
 
             // Position de départ du perso
             Canvas.SetLeft(imgPerso, 100);
@@ -94,10 +97,10 @@ namespace CrownSurvivor
 
         private void Timer_Tick(object sender, EventArgs e)
         {
+            // déplacement du perso (ton code)
             double x = Canvas.GetLeft(imgPerso);
             double y = Canvas.GetTop(imgPerso);
 
-            // déplacement fixe à chaque tick
             if (gauche) x -= vitesse;
             if (droite) x += vitesse;
             if (haut) y -= vitesse;
@@ -105,13 +108,40 @@ namespace CrownSurvivor
 
             Canvas.SetLeft(imgPerso, x);
             Canvas.SetTop(imgPerso, y);
+
+            // spawn régulier d’ennemis
+            enemySpawnCounter++;
+            if (enemySpawnCounter >= enemySpawnInterval)
+            {
+                enemySpawnCounter = 0;
+                SpawnEnemy();
+            }
+
+            // déplacement des ennemis vers le joueur
+            MoveEnemiesToPlayer();
         }
 
-        private void Enemie_Spawn()
-        { ImageBrush enemiesprite = new ImageBrush();
+        private void SpawnEnemy()
+        {
+            do
+            {
+                Image e = new Image
+                {
+                    Width = 30,
+                    Height = 30,
+                    Stretch = Stretch.Uniform
+                };
 
-            enemieSurLeTerrain = random.Next(1, 6);
+                Uri uri = new Uri($"pack://application:,,,/image/ImZombie.png");
+                e.Source = new BitmapImage(uri);
 
+                ZoneJeu.Children.Add(e);
+                Canvas.SetLeft(e, 0);
+                Canvas.SetTop(e, 0);
+
+                enemies.Add(e); ;
+                enemieSurLeTerrain++;
+            } while (enemieSurLeTerrain < 5);
         }
 
         public double[] Personnage(int _numeroImage)
@@ -156,7 +186,33 @@ namespace CrownSurvivor
             return stats;
         }
 
+        private void MoveEnemiesToPlayer()
+        {
+            double px = Canvas.GetLeft(imgPerso) + imgPerso.Width / 2;
+            double py = Canvas.GetTop(imgPerso) + imgPerso.Height / 2;
 
+            foreach (var e in enemies)
+            {
+                double ex = Canvas.GetLeft(e) + e.Width / 2;
+                double ey = Canvas.GetTop(e) + e.Height / 2;
+
+                double dx = px - ex;
+                double dy = py - ey;
+
+                double length = Math.Sqrt(dx * dx + dy * dy);
+                if (length == 0) continue;
+
+                dx /= length;
+                dy /= length;
+
+                ex += dx * enemySpeed;
+                ey += dy * enemySpeed;
+
+                Canvas.SetLeft(e, ex - e.Width / 2);
+                Canvas.SetTop(e, ey - e.Height / 2);
+            }
+        }
     }
 }
+
     
