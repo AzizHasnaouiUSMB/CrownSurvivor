@@ -23,13 +23,6 @@
     <None Remove="ImPerso\Im4.png" />
     <None Remove="ImPerso\Im5.png" />
     <None Remove="ImPerso\Im6.png" />
-    <None Remove="sons\SonTest.wav" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="sons\SonTest.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -50,6 +43,12 @@
     <Resource Include="ImPerso\Im4.png" />
     <Resource Include="ImPerso\Im5.png" />
     <Resource Include="ImPerso\Im6.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="sons\SonTest.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

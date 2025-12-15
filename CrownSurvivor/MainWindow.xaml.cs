@@ -26,12 +26,14 @@ namespace CrownSurvivor
         private MediaPlayer sonTest = new MediaPlayer();
         private UCTirage _ucTirage;
         public static double nivSon;
+        private static MediaPlayer musique;
 
         public MainWindow()
         {
             InitializeComponent();
             AfficheDemarrage();
             InitSon();
+            InitMusique();
         }
 
         private void AfficheDemarrage()
@@ -108,5 +110,21 @@ namespace CrownSurvivor
         {
             sonTest.Open(new Uri("sons/SonTest.wav", UriKind.Relative));
         }
+
+        private void InitMusique()
+        {
+            musique = new MediaPlayer();
+            musique.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory +
+           "sons/MusiqueFondAccueil.mp3"));
+            musique.MediaEnded += RelanceMusique;
+            musique.Volume = nivSon;
+            musique.Play();
+        }
+        private void RelanceMusique(object? sender, EventArgs e)
+        {
+            musique.Position = TimeSpan.Zero;
+            musique.Play();
+        }
+
     }
 }
