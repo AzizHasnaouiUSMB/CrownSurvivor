@@ -23,6 +23,7 @@
     <None Remove="ImPerso\Im4.png" />
     <None Remove="ImPerso\Im5.png" />
     <None Remove="ImPerso\Im6.png" />
+    <None Remove="sons\TestSon.wav" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +44,7 @@
     <Resource Include="ImPerso\Im4.png" />
     <Resource Include="ImPerso\Im5.png" />
     <Resource Include="ImPerso\Im6.png" />
+    <Content Include="sons\TestSon.wav" />
   </ItemGroup>
 
 </Project>

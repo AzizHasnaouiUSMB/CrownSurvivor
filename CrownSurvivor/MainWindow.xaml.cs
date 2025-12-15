@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Media;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,14 +16,30 @@ namespace CrownSurvivor
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+
+
+
     public partial class MainWindow : Window
     {
+
+        private MediaPlayer sonTest = new MediaPlayer();
         private UCTirage _ucTirage;
         public MainWindow()
         {
             InitializeComponent();
             AfficheDemarrage();
+            sonTest.MediaOpened += SonTest_MediaOpened;
+            InitSon();
         }
+
+        private void SonTest_MediaOpened(object sender, EventArgs e)
+        {
+            // C'est ici que vous pouvez vous assurer que tout est prêt
+            // Si vous le souhaitez, vous pouvez déclencher un message de confirmation ici
+            // MessageBox.Show("Le son a été chargé et est prêt à être joué.");
+        }
+
         private void AfficheDemarrage()
         {
             // crée et charge l'écran de démarrage
@@ -69,6 +86,14 @@ namespace CrownSurvivor
             UCParametres uc = new UCParametres();
             ZoneJeu.Content = uc;
             uc.butRetourPara.Click += RetourVersDemarrage;
+            uc.butTestSon.Click += JouerSon;
+            //uc.slidSon
+        }
+
+        private void JouerSon(object sender, RoutedEventArgs e)
+        {
+            sonTest.Position = TimeSpan.Zero;
+            sonTest.Play();
         }
 
         private void AfficherRegles(object sender, RoutedEventArgs e)
@@ -83,6 +108,15 @@ namespace CrownSurvivor
             AfficheDemarrage();
         }
 
+        private void InitSon()
+        {
+                
+            //MusicPlayer.Open(new Uri("pack://application:,,,/sons/TestSon.wav", UriKind.Relative));
             
+
+        }
+
+
+
     }
 }
