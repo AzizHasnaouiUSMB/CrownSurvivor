@@ -101,15 +101,12 @@ namespace CrownSurvivor
 
         private void PasserEnPetitEcran(object sender, RoutedEventArgs e)
         {
-            
             WindowStyle = WindowStyle.SingleBorderWindow;
             WindowState = WindowState.Normal;
-
         }
 
         private void PasserEnGrandEcran(object sender, RoutedEventArgs e)
         {
-            
             WindowState = WindowState.Maximized;
             ResizeMode = ResizeMode.NoResize;
         }
