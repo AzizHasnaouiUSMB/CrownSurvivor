@@ -28,7 +28,6 @@ namespace CrownSurvivor
     public partial class UCJeu : UserControl
     {
         private Random random = new Random();
-        private int enemieSurLeTerrain = 0;
         private int damage = 0;
         private int score = 0;
         private double vitesse = 5;
@@ -52,6 +51,10 @@ namespace CrownSurvivor
         private double enemySpeed = 2;
         private int enemySpawnCounter = 0;
         private int enemySpawnInterval = 50; // nombre de ticks entre 2 spawns
+
+        private int enemieSurLeTerrain = 0;
+        private int limiteEnemie = 5;      // limite de base
+        private int secondesEcoulees = 0;  // pour compter les secondes
         public UCJeu(int numeroImage)
         {   
             InitializeComponent();
@@ -97,7 +100,7 @@ namespace CrownSurvivor
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            // déplacement du perso (ton code)
+            // déplacement du perso
             double x = Canvas.GetLeft(imgPerso);
             double y = Canvas.GetTop(imgPerso);
 
@@ -109,39 +112,47 @@ namespace CrownSurvivor
             Canvas.SetLeft(imgPerso, x);
             Canvas.SetTop(imgPerso, y);
 
-            // spawn régulier d’ennemis
+            // comptage du temps
             enemySpawnCounter++;
-            if (enemySpawnCounter >= enemySpawnInterval)
+            if (enemySpawnCounter >= 50) // 50 ticks ≈ 1 seconde
             {
                 enemySpawnCounter = 0;
-                SpawnEnemy();
+                secondesEcoulees++;
+
+                // toutes les 5 secondes -> spawn si sous la limite
+                if (secondesEcoulees % 5 == 0)
+                    SpawnEnemy();
+
+                // toutes les 60 secondes -> augmente la limite de 1
+                if (secondesEcoulees % 60 == 0)
+                    limiteEnemie++;
             }
 
-            // déplacement des ennemis vers le joueur
+            // déplacement des ennemis
             MoveEnemiesToPlayer();
         }
 
         private void SpawnEnemy()
         {
-            do
+            if (enemieSurLeTerrain >= limiteEnemie)
+                return;   // ne dépasse pas la limite actuelle
+
+            Image e = new Image
             {
-                Image e = new Image
-                {
-                    Width = 30,
-                    Height = 30,
-                    Stretch = Stretch.Uniform
-                };
+                Width = 30,
+                Height = 30,
+                Stretch = Stretch.Uniform
+            };
 
-                Uri uri = new Uri($"pack://application:,,,/image/ImZombie.png");
-                e.Source = new BitmapImage(uri);
+            Uri uri = new Uri("pack://application:,,,/image/ImZombie.png");
+            e.Source = new BitmapImage(uri);
 
-                ZoneJeu.Children.Add(e);
-                Canvas.SetLeft(e, 0);
-                Canvas.SetTop(e, 0);
+            ZoneJeu.Children.Add(e);
+            Canvas.SetLeft(e, 0);
+            Canvas.SetTop(e, 0);
 
-                enemies.Add(e); ;
-                enemieSurLeTerrain++;
-            } while (enemieSurLeTerrain < 5);
+            enemies.Add(e);
+            enemieSurLeTerrain++;
         }
 
         public double[] Personnage(int _numeroImage)
