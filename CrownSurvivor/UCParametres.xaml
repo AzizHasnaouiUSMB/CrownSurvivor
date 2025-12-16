@@ -30,6 +30,25 @@
         </Button>
 
 
+        <Button x:Name="butGrandEcran" Content="AGRANDIR LA FENETRE" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top" Height="40" Width="180" Foreground="#FFE6C18A"  Click="butGrandEcran_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/image/BoutonFond.png"/>
+            </Button.Background>
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/image/button.png"/>
+            </Button.OpacityMask>
+        </Button>
+
+        <Button x:Name="butRetrecirEcran" Content="RETRECIR LA FENETRE" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top" Height="40" Width="180" Foreground="#FFE6C18A"  Click="butRetrecirEcran_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/image/BoutonFond.png"/>
+            </Button.Background>
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/image/button.png"/>
+            </Button.OpacityMask>
+        </Button>
+
+
         <Label Content="Parametres" HorizontalAlignment="Center" Margin="0,53,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
         <Label Content="Son :" HorizontalAlignment="Left" Margin="167,120,0,0" VerticalAlignment="Top" FontSize="20"/>
 

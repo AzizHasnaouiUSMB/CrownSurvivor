@@ -25,7 +25,7 @@ namespace CrownSurvivor
 
         private MediaPlayer sonTest = new MediaPlayer();
         private UCTirage _ucTirage;
-        public static double nivSon = 0.5;
+        public static double nivSon = 50;
         private static MediaPlayer musique;
 
         public MainWindow()
@@ -91,10 +91,26 @@ namespace CrownSurvivor
         {
             UCParametres uc = new UCParametres();
             ZoneJeu.Content = uc;
+            uc.butRetrecirEcran.Visibility = Visibility.Hidden;
             uc.butRetourPara.Click += RetourVersDemarrage;
             uc.butTestSon.Click += JouerSon;
             uc.slidSon.Value = nivSon;
+            uc.butGrandEcran.Click += PasserEnGrandEcran;
+            uc.butRetrecirEcran.Click += PasserEnPetitEcran;
         }
+
+        private void PasserEnPetitEcran(object sender, RoutedEventArgs e)
+        {
+            WindowStyle = WindowStyle.SingleBorderWindow;
+            WindowState = WindowState.Normal;
+        }
+
+        private void PasserEnGrandEcran(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Maximized;
+            ResizeMode = ResizeMode.NoResize;
+        }
+        
 
         private void JouerSon(object sender, RoutedEventArgs e)
         {
@@ -141,7 +157,7 @@ namespace CrownSurvivor
             musique.MediaEnded += RelanceMusique;
             musique.Volume = nivSon;
             musique.Play();
-            Console.WriteLine("Paff");
+            Console.WriteLine("Oui");
         }
 
         private void RelanceMusique(object? sender, EventArgs e)
@@ -155,5 +171,6 @@ namespace CrownSurvivor
             if (musique != null)
                 musique.Volume = nivSon;
         }
+
     }
 }

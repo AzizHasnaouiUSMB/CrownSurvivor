@@ -28,6 +28,9 @@ namespace CrownSurvivor
     public partial class UCJeu : UserControl
     {
         private Random random = new Random();
+        private int enemieSurLeTerrain = 0;
+        private int limiteEnemie = 5;
+        private int secondes = 0;
         private int damage = 0;
         private int score = 0;
         private double vitesse = 5;
@@ -114,19 +117,17 @@ namespace CrownSurvivor
 
             // comptage du temps
             enemySpawnCounter++;
-            if (enemySpawnCounter >= 50) // 50 ticks ≈ 1 seconde
-            {
+            // if (enemySpawnCounter >= 50) à revoir 
+            
                 enemySpawnCounter = 0;
-                secondesEcoulees++;
+                secondes++;
 
-                // toutes les 5 secondes -> spawn si sous la limite
-                if (secondesEcoulees % 5 == 0)
+                if (secondes % 10 == 0)
                     SpawnEnemy();
 
-                // toutes les 60 secondes -> augmente la limite de 1
-                if (secondesEcoulees % 60 == 0)
+                if (secondes % 120 == 0)
                     limiteEnemie++;
-            }
+            
 
             // déplacement des ennemis
             MoveEnemiesToPlayer();
@@ -135,14 +136,13 @@ namespace CrownSurvivor
         private void SpawnEnemy()
         {
             if (enemieSurLeTerrain >= limiteEnemie)
-                return;   // ne dépasse pas la limite actuelle
-
+                return;
             Image e = new Image
-            {
-                Width = 30,
-                Height = 30,
-                Stretch = Stretch.Uniform
-            };
+                {
+                    Width = 30,
+                    Height = 30,
+                    Stretch = Stretch.Uniform
+                };
 
             Uri uri = new Uri("pack://application:,,,/image/ImZombie.png");
             e.Source = new BitmapImage(uri);
@@ -151,8 +151,9 @@ namespace CrownSurvivor
             Canvas.SetLeft(e, 0);
             Canvas.SetTop(e, 0);
 
-            enemies.Add(e);
-            enemieSurLeTerrain++;
+                enemies.Add(e); ;
+                enemieSurLeTerrain++;
+            
         }
 
         public double[] Personnage(int _numeroImage)
@@ -184,7 +185,7 @@ namespace CrownSurvivor
 
 
             }
-
+     
             else if (_numeroImage == 5)
             {
 
@@ -205,7 +206,7 @@ namespace CrownSurvivor
             foreach (var e in enemies)
             {
                 double ex = Canvas.GetLeft(e) + e.Width / 2;
-                double ey = Canvas.GetTop(e) + e.Height / 2;
+                double ey = Canvas.GetTop(e) + e.Height / 2;    
 
                 double dx = px - ex;
                 double dy = py - ey;
