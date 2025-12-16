@@ -50,6 +50,9 @@ namespace CrownSurvivor
         const int STAT_VITESSE = 3;
         const int NB_STATS = 4;
 
+        private double currentHP;
+        private double maxHP;
+
         double[] stats = new double[NB_STATS];
 
         private int _numeroImage;
@@ -62,31 +65,68 @@ namespace CrownSurvivor
         private double projectileSpeed = 10;
         private int tirCounter = 0;      // compteur pour la cadence de tir
 
+        private double projectileDamageMultiplier = 1.0;
+        private double projectileSpeedMultiplier = 1.0;
+        private double luckyShotChance = 0.0;
+        private double projectileHitboxMultiplier = 1.0;
+        private bool slowEnemiesOnHit = false;
+
+        private int wave = 1;                 // numéro de vague
+        private double enemyHpMultiplier = 1; // PV ennemis (1.0 de base)
+
         public UCJeu(int numeroImage)
         {
             InitializeComponent();
             _numeroImage = numeroImage;
 
-
-            // Position de départ du perso
             Canvas.SetLeft(imgPerso, 100);
             Canvas.SetTop(imgPerso, 100);
-
-            // Focus clavier
             this.Loaded += (s, e) => this.Focus();
 
-            // Boucle de jeu
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(20); // ~50 fois par seconde
+            timer.Interval = TimeSpan.FromMilliseconds(20);
             timer.Tick += Timer_Tick;
             timer.Start();
 
             string Chemin = $"/ImPerso/im{_numeroImage}.png";
-            Console.WriteLine(Chemin);
             Uri path = new Uri($"pack://application:,,,{Chemin}");
             BitmapImage bitmap = new BitmapImage(path);
             imgPerso.Source = bitmap;
+
+            // récupère les stats de base du perso
             stats = Personnage(_numeroImage);
+
+            // PV de base
+            maxHP = stats[STAT_PV];
+            currentHP = maxHP;
+            UpdateHealthBar();
+
+            // reset des bonus
+            projectileDamageMultiplier = 1.0;
+            projectileSpeedMultiplier = 1.0;
+            luckyShotChance = 0.0;
+            projectileHitboxMultiplier = 1.0;
+            slowEnemiesOnHit = false;
+
+            // pouvoirs selon l'image tirée (1 à 5)
+            switch (_numeroImage)
+            {
+                case 1:
+                    projectileDamageMultiplier = 1.20;  // +20% dégâts
+                    break;
+                case 2:
+                    projectileSpeedMultiplier = 1.20;   // +20% vitesse des tirs
+                    break;
+                case 3:
+                    luckyShotChance = 0.01;             // 1% one-shot
+                    break;
+                case 4:
+                    projectileHitboxMultiplier = 1.5;   // hitbox ×1,5
+                    break;
+                case 5:
+                    slowEnemiesOnHit = true;            // ralentissement actif
+                    break;
+            }
         }
 
         private void UCJeu_KeyDown(object sender, KeyEventArgs e)
@@ -107,7 +147,6 @@ namespace CrownSurvivor
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            // déplacement du perso
             double x = Canvas.GetLeft(imgPerso);
             double y = Canvas.GetTop(imgPerso);
 
@@ -116,32 +155,43 @@ namespace CrownSurvivor
             if (haut) y -= vitesse;
             if (bas) y += vitesse;
 
+            // bordures de la map
+            double maxX = Math.Max(0, ZoneJeu.ActualWidth - imgPerso.Width);
+            double maxY = Math.Max(0, ZoneJeu.ActualHeight - imgPerso.Height);
+
+            if (x < 0) x = 0;
+            if (y < 0) y = 0;
+            if (x > maxX) x = maxX;
+            if (y > maxY) y = maxY;
+
             Canvas.SetLeft(imgPerso, x);
             Canvas.SetTop(imgPerso, y);
 
             // ---- gestion du temps ----
             ticks++;
 
-            if (ticks >= 50) // 50 ticks ≈ 1 seconde
+            if (ticks >= 50)
             {
                 ticks = 0;
                 secondes++;
 
-                // toutes les 2 secondes -> spawn
-                if (secondes % 2 == 0)
+                if (secondes % 1 == 0)
                     SpawnEnemy();
 
-                // toutes les 30 secondes -> +1 à la limite
-                if (secondes % 30 == 0)
+                if (secondes % 15 == 0)
+                {
                     limiteEnemie++;
+                    wave++;
+                    enemyHpMultiplier *= 1.2;
+                    UpdateWaveText();
+                }
             }
 
-            // déplacement des ennemis
+            // BOUCLE DE JEU (à ne pas oublier)
             MoveEnemiesToPlayer();
-
-            // tir auto
+            CheckPlayerCollisions();
             tirCounter++;
-            if (tirCounter >= 25) // toutes les ~0,5 s
+            if (tirCounter >= 25)
             {
                 tirCounter = 0;
                 SpawnAutoShot();
@@ -149,69 +199,53 @@ namespace CrownSurvivor
             MoveProjectiles();
             CheckProjectileCollisions();
         }
+
         private void SpawnEnemy()
         {
             if (enemieSurLeTerrain >= limiteEnemie)
                 return;
+
             Image e = new Image
             {
                 Width = 30,
                 Height = 30,
-                Stretch = Stretch.Uniform
+                Stretch = Stretch.Uniform,
+                Source = new BitmapImage(new Uri("pack://application:,,,/image/ImZombie.png"))
             };
 
-            Uri uri = new Uri("pack://application:,,,/image/ImZombie.png");
-            e.Source = new BitmapImage(uri);
-
             ZoneJeu.Children.Add(e);
-            Canvas.SetLeft(e, 0);
-            Canvas.SetTop(e, 0);
 
-            enemies.Add(e); ;
+            // s'assurer que la taille du Canvas est connue
+            double maxX = Math.Max(0, ZoneJeu.ActualWidth - e.Width);
+            double maxY = Math.Max(0, ZoneJeu.ActualHeight - e.Height);
+
+            // coordonnés aléatoires dans la map
+            double x = random.NextDouble() * maxX;
+            double y = random.NextDouble() * maxY;
+
+            Canvas.SetLeft(e, x);
+            Canvas.SetTop(e, y);
+
+            enemies.Add(e);
             enemieSurLeTerrain++;
-
         }
 
-        public double[] Personnage(int _numeroImage)
+        public double[] Personnage(int numeroImage)
         {
-            double[] stats = new double[4];  // PV, Attaque, Défense, Vitesse
+            double[] s = new double[4];
 
-            stats[0] = 100;   // PV
-            stats[1] = 10;    // Attaque
-            stats[2] = 5;     // Défense
-            stats[3] = 3;     // Vitesse
+            s[STAT_PV] = 100;
+            s[STAT_ATTAQUE] = 10;
+            s[STAT_DEFENSE] = 5;
+            s[STAT_VITESSE] = 3;
 
-            if (_numeroImage == 1)
-            {
-                stats[3] = stats[3] * 1.20;
-            }
+            // bonus de stats de base selon le perso
+            if (numeroImage == 1)
+                s[STAT_VITESSE] *= 1.20;
+            else if (numeroImage == 2)
+                s[STAT_ATTAQUE] *= 1.20;
 
-            else if (_numeroImage == 2)
-            {
-                stats[1] = stats[1] * 1.20;
-            }
-
-            else if (_numeroImage == 3)
-            {
-
-            }
-
-            else if (_numeroImage == 4)
-            {
-
-
-            }
-
-            else if (_numeroImage == 5)
-            {
-
-            }
-            else
-            {
-
-            }
-
-            return stats;
+            return s;
         }
 
         private void MoveEnemiesToPlayer()
@@ -312,8 +346,8 @@ namespace CrownSurvivor
                 Image p = projectiles[i];
                 Vector dir = (Vector)p.Tag;
 
-                double x = Canvas.GetLeft(p) + dir.X * projectileSpeed;
-                double y = Canvas.GetTop(p) + dir.Y * projectileSpeed;
+                double x = Canvas.GetLeft(p) + dir.X * projectileSpeed * projectileSpeedMultiplier;
+                double y = Canvas.GetTop(p) + dir.Y * projectileSpeed * projectileSpeedMultiplier;
 
                 Canvas.SetLeft(p, x);
                 Canvas.SetTop(p, y);
@@ -329,6 +363,35 @@ namespace CrownSurvivor
             }
         }
 
+        private void CheckPlayerCollisions()
+        {
+            Rect playerBox = GetPlayerHitbox();
+
+            for (int i = enemies.Count - 1; i >= 0; i--)
+            {
+                Image e = enemies[i];
+                Rect enemyBox = GetEnemyHitbox(e);
+
+                if (playerBox.IntersectsWith(enemyBox))
+                {
+                    double degatsRecus = 10.0 / Math.Max(1.0, stats[STAT_DEFENSE]);
+
+                    currentHP -= degatsRecus;
+                    if (currentHP < 0) currentHP = 0;
+                    UpdateHealthBar();
+
+                    ZoneJeu.Children.Remove(e);
+                    enemies.RemoveAt(i);
+                    enemieSurLeTerrain--;
+
+                    if (currentHP <= 0)
+                    {
+                        GameOver();
+                        break;
+                    }
+                }
+            }
+        }
         private void CheckProjectileCollisions()
         {
             for (int i = projectiles.Count - 1; i >= 0; i--)
@@ -343,30 +406,45 @@ namespace CrownSurvivor
 
                     if (projBox.IntersectsWith(enemyBox))
                     {
-                        // dégâts / score
-                        score += 10;
+                        bool oneShot = random.NextDouble() < luckyShotChance;
 
-                        // supprimer projectile et ennemi
+                        if (oneShot)
+                        {
+                            score += 100;
+                        }
+                        else
+                        {
+                            double degatsBase = stats[STAT_ATTAQUE] * projectileDamageMultiplier;
+                            // plus la vague est haute, plus les ennemis sont résistants
+                            double degatsEffectifs = degatsBase / enemyHpMultiplier;
+
+                            score += (int)degatsEffectifs;
+                        }
+
                         ZoneJeu.Children.Remove(p);
                         ZoneJeu.Children.Remove(e);
                         projectiles.RemoveAt(i);
                         enemies.RemoveAt(j);
                         enemieSurLeTerrain--;
-
-                        break; // on arrête de tester ce projectile
+                        break;
                     }
                 }
             }
         }
+
         private Rect GetProjectileHitbox(Image p)
         {
             double x = Canvas.GetLeft(p);
             double y = Canvas.GetTop(p);
-            double w = p.Width;
-            double h = p.Height;
+            double w = p.Width * projectileHitboxMultiplier;
+            double h = p.Height * projectileHitboxMultiplier;
+
+            x -= (w - p.Width) / 2;
+            y -= (h - p.Height) / 2;
 
             return new Rect(x, y, w, h);
         }
+
         private Image GetClosestEnemy()
         {
             if (enemies.Count == 0)
@@ -397,8 +475,31 @@ namespace CrownSurvivor
             return closest;
         }
 
+
+        private void UpdateHealthBar()
+        {
+            if (HpBar == null) return;
+
+            double pourcentage = (currentHP / maxHP) * 100.0;
+            if (pourcentage < 0) pourcentage = 0;
+            if (pourcentage > 100) pourcentage = 100;
+
+            HpBar.Value = pourcentage;
+        }
+
+        private void GameOver()
+        {
+            timer.Stop();
+            MessageBox.Show("Game Over !");
+            // plus tard : revenir à l’écran de démarrage
+        }
+
+        private void UpdateWaveText()
+        {
+            if (txtWave != null)
+                txtWave.Text = $"Vague {wave}";
+        }
     }
 }
-
 
 
