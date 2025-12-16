@@ -29,6 +29,8 @@ namespace CrownSurvivor
     {
         private Random random = new Random();
         private int enemieSurLeTerrain = 0;
+        private int limiteEnemie = 5;
+        private int secondes = 0;
         private int damage = 0;
         private int score = 0;
         private double vitesse = 5;
@@ -111,11 +113,17 @@ namespace CrownSurvivor
 
             // spawn régulier d’ennemis
             enemySpawnCounter++;
-            if (enemySpawnCounter >= enemySpawnInterval)
-            {
+            // if (enemySpawnCounter >= 50) à revoir 
+            
                 enemySpawnCounter = 0;
-                SpawnEnemy();
-            }
+                secondes++;
+
+                if (secondes % 10 == 0)
+                    SpawnEnemy();
+
+                if (secondes % 120 == 0)
+                    limiteEnemie++;
+            
 
             // déplacement des ennemis vers le joueur
             MoveEnemiesToPlayer();
@@ -123,9 +131,9 @@ namespace CrownSurvivor
 
         private void SpawnEnemy()
         {
-            do
-            {
-                Image e = new Image
+            if (enemieSurLeTerrain >= limiteEnemie)
+                return;
+            Image e = new Image
                 {
                     Width = 30,
                     Height = 30,
@@ -141,7 +149,7 @@ namespace CrownSurvivor
 
                 enemies.Add(e); ;
                 enemieSurLeTerrain++;
-            } while (enemieSurLeTerrain < 5);
+            
         }
 
         public double[] Personnage(int _numeroImage)
@@ -173,7 +181,7 @@ namespace CrownSurvivor
 
 
             }
-
+     
             else if (_numeroImage == 5)
             {
 
@@ -194,7 +202,7 @@ namespace CrownSurvivor
             foreach (var e in enemies)
             {
                 double ex = Canvas.GetLeft(e) + e.Width / 2;
-                double ey = Canvas.GetTop(e) + e.Height / 2;
+                double ey = Canvas.GetTop(e) + e.Height / 2;    
 
                 double dx = px - ex;
                 double dy = py - ey;
