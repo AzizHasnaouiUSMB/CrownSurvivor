@@ -501,6 +501,7 @@ namespace CrownSurvivor
             if (pourcentage > 100) pourcentage = 100;
 
             HpBar.Value = pourcentage;
+
         }
 
         private void GameOver()

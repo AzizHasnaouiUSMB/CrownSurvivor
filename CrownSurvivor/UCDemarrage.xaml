@@ -13,14 +13,7 @@
         </Grid.Background>
 
         <Image Margin="174,10,174,205" Source="/image/télécharger (1).png" Stretch="Fill"/>
-        <Button x:Name="butJouer" Content="JOUER" HorizontalAlignment="Left" Margin="136,341,0,0" VerticalAlignment="Top" Height="40" Width="90">
-            <Button.Background>
-                <ImageBrush ImageSource="/image/button.png"/>
-            </Button.Background>
-            <Button.OpacityMask>
-                <ImageBrush ImageSource="/image/button.png"/>
-            </Button.OpacityMask>
-        </Button>
+
         <Button x:Name="butPara" Content="PARAMETRES" HorizontalAlignment="Center" Margin="0,294,0,0" VerticalAlignment="Top" Height="40" Width="90" Click="butPara_Click">
             <Button.Background>
                 <ImageBrush ImageSource="/image/button.png"/>

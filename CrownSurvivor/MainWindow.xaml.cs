@@ -46,7 +46,6 @@ namespace CrownSurvivor
             uc.butQuitter.Click += Quitter;
             uc.butRegles.Click += AfficherRegles;
             uc.butPara.Click += AfficherPara;
-            uc.butJouer.Click += AfficherJeu;
             uc.butTirageP.Click += AfficherTirrage;
         }
 
