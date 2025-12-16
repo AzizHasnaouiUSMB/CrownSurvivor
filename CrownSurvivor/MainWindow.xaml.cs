@@ -160,7 +160,7 @@ namespace CrownSurvivor
             musique.MediaEnded += RelanceMusique;
             musique.Volume = nivSon;
             musique.Play();
-            Console.WriteLine("Paff");
+            Console.WriteLine("Oui");
         }
 
         private void RelanceMusique(object? sender, EventArgs e)
