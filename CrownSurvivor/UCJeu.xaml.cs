@@ -18,22 +18,26 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 
 using System.Windows.Threading;
+using static System.Formats.Asn1.AsnWriter;
 //rajout 
 
 namespace CrownSurvivor
-{   
+{
     /// <summary>
     /// Logique d'interaction pour UCJeu.xaml
     /// </summary>
     public partial class UCJeu : UserControl
     {
         private Random random = new Random();
+
         private int enemieSurLeTerrain = 0;
         private int limiteEnemie = 5;
         private int secondes = 0;
-        private int damage = 0;
+        private int ticks = 0;
         private int score = 0;
+
         private double vitesse = 5;
+
         // Indiquent si la touche correspondante est actuellement enfoncée.
         private bool gauche, droite, haut, bas;
         private readonly DispatcherTimer timer;
@@ -52,14 +56,14 @@ namespace CrownSurvivor
 
         private List<Image> enemies = new List<Image>();
         private double enemySpeed = 2;
-        private int enemySpawnCounter = 0;
-        private int enemySpawnInterval = 50; // nombre de ticks entre 2 spawns
 
-        private int enemieSurLeTerrain = 0;
-        private int limiteEnemie = 5;      // limite de base
-        private int secondesEcoulees = 0;  // pour compter les secondes
+
+        private List<Image> projectiles = new List<Image>();
+        private double projectileSpeed = 10;
+        private int tirCounter = 0;      // compteur pour la cadence de tir
+
         public UCJeu(int numeroImage)
-        {   
+        {
             InitializeComponent();
             _numeroImage = numeroImage;
 
@@ -115,34 +119,46 @@ namespace CrownSurvivor
             Canvas.SetLeft(imgPerso, x);
             Canvas.SetTop(imgPerso, y);
 
-            // comptage du temps
-            enemySpawnCounter++;
-            // if (enemySpawnCounter >= 50) à revoir 
-            
-                enemySpawnCounter = 0;
+            // ---- gestion du temps ----
+            ticks++;
+
+            if (ticks >= 50) // 50 ticks ≈ 1 seconde
+            {
+                ticks = 0;
                 secondes++;
 
-                if (secondes % 10 == 0)
+                // toutes les 2 secondes -> spawn
+                if (secondes % 2 == 0)
                     SpawnEnemy();
 
-                if (secondes % 120 == 0)
+                // toutes les 30 secondes -> +1 à la limite
+                if (secondes % 30 == 0)
                     limiteEnemie++;
-            
+            }
 
             // déplacement des ennemis
             MoveEnemiesToPlayer();
-        }
 
+            // tir auto
+            tirCounter++;
+            if (tirCounter >= 25) // toutes les ~0,5 s
+            {
+                tirCounter = 0;
+                SpawnAutoShot();
+            }
+            MoveProjectiles();
+            CheckProjectileCollisions();
+        }
         private void SpawnEnemy()
         {
             if (enemieSurLeTerrain >= limiteEnemie)
                 return;
             Image e = new Image
-                {
-                    Width = 30,
-                    Height = 30,
-                    Stretch = Stretch.Uniform
-                };
+            {
+                Width = 30,
+                Height = 30,
+                Stretch = Stretch.Uniform
+            };
 
             Uri uri = new Uri("pack://application:,,,/image/ImZombie.png");
             e.Source = new BitmapImage(uri);
@@ -151,9 +167,9 @@ namespace CrownSurvivor
             Canvas.SetLeft(e, 0);
             Canvas.SetTop(e, 0);
 
-                enemies.Add(e); ;
-                enemieSurLeTerrain++;
-            
+            enemies.Add(e); ;
+            enemieSurLeTerrain++;
+
         }
 
         public double[] Personnage(int _numeroImage)
@@ -185,7 +201,7 @@ namespace CrownSurvivor
 
 
             }
-     
+
             else if (_numeroImage == 5)
             {
 
@@ -206,7 +222,7 @@ namespace CrownSurvivor
             foreach (var e in enemies)
             {
                 double ex = Canvas.GetLeft(e) + e.Width / 2;
-                double ey = Canvas.GetTop(e) + e.Height / 2;    
+                double ey = Canvas.GetTop(e) + e.Height / 2;
 
                 double dx = px - ex;
                 double dy = py - ey;
@@ -224,7 +240,165 @@ namespace CrownSurvivor
                 Canvas.SetTop(e, ey - e.Height / 2);
             }
         }
+
+        private Rect GetPlayerHitbox()
+        {
+            double x = Canvas.GetLeft(imgPerso);
+            double y = Canvas.GetTop(imgPerso);
+            double w = imgPerso.Width;
+            double h = imgPerso.Height;
+
+            return new Rect(x, y, w, h);
+        }
+        private Rect GetEnemyHitbox(Image e)
+        {
+            double x = Canvas.GetLeft(e);
+            double y = Canvas.GetTop(e);
+            double w = e.Width;
+            double h = e.Height;
+
+            return new Rect(x, y, w, h);
+        }
+
+        private void SpawnAutoShot()
+        {
+            // pas d'ennemi -> pas de tir
+            Image cible = GetClosestEnemy();
+            if (cible == null)
+                return;
+
+            // centre du joueur
+            double px = Canvas.GetLeft(imgPerso) + imgPerso.Width / 2;
+            double py = Canvas.GetTop(imgPerso) + imgPerso.Height / 2;
+
+            // centre de l'ennemi le plus proche
+            double ex = Canvas.GetLeft(cible) + cible.Width / 2;
+            double ey = Canvas.GetTop(cible) + cible.Height / 2;
+
+            // direction joueur -> ennemi
+            double dx = ex - px;
+            double dy = ey - py;
+            double length = Math.Sqrt(dx * dx + dy * dy);
+            if (length == 0) return;
+            dx /= length;
+            dy /= length;
+            Vector dir = new Vector(dx, dy);
+
+            // créer le projectile
+            Image proj = new Image
+            {
+                Width = 10,
+                Height = 10,
+                Stretch = Stretch.Uniform,
+                Source = new BitmapImage(new Uri("pack://application:,,,/image/ImBalle.png"))
+            };
+
+            // l'ajouter dans la zone de jeu, à la position du joueur
+            ZoneJeu.Children.Add(proj);
+            Canvas.SetLeft(proj, px - proj.Width / 2);
+            Canvas.SetTop(proj, py - proj.Height / 2);
+
+            // stocker la direction dans Tag pour MoveProjectiles()
+            proj.Tag = dir;
+
+            // mémoriser ce projectile dans la liste
+            projectiles.Add(proj);
+        }
+
+        private void MoveProjectiles()
+        {
+            for (int i = projectiles.Count - 1; i >= 0; i--)
+            {
+                Image p = projectiles[i];
+                Vector dir = (Vector)p.Tag;
+
+                double x = Canvas.GetLeft(p) + dir.X * projectileSpeed;
+                double y = Canvas.GetTop(p) + dir.Y * projectileSpeed;
+
+                Canvas.SetLeft(p, x);
+                Canvas.SetTop(p, y);
+
+                if (x > ZoneJeu.ActualWidth + 20 ||
+                    x < -20 ||
+                    y > ZoneJeu.ActualHeight + 20 ||
+                    y < -20)
+                {
+                    ZoneJeu.Children.Remove(p);
+                    projectiles.RemoveAt(i);
+                }
+            }
+        }
+
+        private void CheckProjectileCollisions()
+        {
+            for (int i = projectiles.Count - 1; i >= 0; i--)
+            {
+                Image p = projectiles[i];
+                Rect projBox = GetProjectileHitbox(p);
+
+                for (int j = enemies.Count - 1; j >= 0; j--)
+                {
+                    Image e = enemies[j];
+                    Rect enemyBox = GetEnemyHitbox(e);
+
+                    if (projBox.IntersectsWith(enemyBox))
+                    {
+                        // dégâts / score
+                        score += 10;
+
+                        // supprimer projectile et ennemi
+                        ZoneJeu.Children.Remove(p);
+                        ZoneJeu.Children.Remove(e);
+                        projectiles.RemoveAt(i);
+                        enemies.RemoveAt(j);
+                        enemieSurLeTerrain--;
+
+                        break; // on arrête de tester ce projectile
+                    }
+                }
+            }
+        }
+        private Rect GetProjectileHitbox(Image p)
+        {
+            double x = Canvas.GetLeft(p);
+            double y = Canvas.GetTop(p);
+            double w = p.Width;
+            double h = p.Height;
+
+            return new Rect(x, y, w, h);
+        }
+        private Image GetClosestEnemy()
+        {
+            if (enemies.Count == 0)
+                return null;
+
+            double px = Canvas.GetLeft(imgPerso) + imgPerso.Width / 2;
+            double py = Canvas.GetTop(imgPerso) + imgPerso.Height / 2;
+
+            Image closest = null;
+            double bestDist2 = double.MaxValue; // distance au carré
+
+            foreach (var e in enemies)
+            {
+                double ex = Canvas.GetLeft(e) + e.Width / 2;
+                double ey = Canvas.GetTop(e) + e.Height / 2;
+
+                double dx = ex - px;
+                double dy = ey - py;
+                double dist2 = dx * dx + dy * dy;
+
+                if (dist2 < bestDist2)
+                {
+                    bestDist2 = dist2;
+                    closest = e;
+                }
+            }
+
+            return closest;
+        }
+
     }
 }
 
-    
+
+
