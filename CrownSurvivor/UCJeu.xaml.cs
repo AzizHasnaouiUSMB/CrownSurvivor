@@ -58,7 +58,8 @@ namespace CrownSurvivor
         private int _numeroImage;
 
         private List<Image> enemies = new List<Image>();
-        private double enemySpeed = 2;
+        private double enemySpeed = 2.5;
+        private Dictionary<Image, double> enemyHp = new Dictionary<Image, double>(); //pour pouvoir donner des hp à plusieurs ennemies
 
 
         private List<Image> projectiles = new List<Image>();
@@ -175,16 +176,17 @@ namespace CrownSurvivor
                 ticks = 0;
                 secondes++;
 
-                if (secondes % 1 == 0)
+                if (secondes % 2 == 0)
                     SpawnEnemy();
 
-                if (secondes % 15 == 0)
+                if (secondes % 20 == 0)
                 {
                     limiteEnemie++;
-                    wave++;
                     enemyHpMultiplier *= 1.2;
                     UpdateWaveText();
+                    wave++;
                 }
+
             }
 
             // BOUCLE DE JEU (à ne pas oublier)
@@ -228,6 +230,9 @@ namespace CrownSurvivor
 
             enemies.Add(e);
             enemieSurLeTerrain++;
+            double baseHp = 15.0;                  // PV de base d'un zombie
+            double hpAvecVague = baseHp * enemyHpMultiplier;
+            enemyHp[e] = hpAvecVague;
         }
 
         public double[] Personnage(int numeroImage)
@@ -408,24 +413,35 @@ namespace CrownSurvivor
                     {
                         bool oneShot = random.NextDouble() < luckyShotChance;
 
+                        double degats;
                         if (oneShot)
                         {
-                            score += 100;
+                            degats = enemyHp.ContainsKey(e) ? enemyHp[e] : 9999; // tue sûr
                         }
                         else
                         {
                             double degatsBase = stats[STAT_ATTAQUE] * projectileDamageMultiplier;
-                            // plus la vague est haute, plus les ennemis sont résistants
-                            double degatsEffectifs = degatsBase / enemyHpMultiplier;
-
-                            score += (int)degatsEffectifs;
+                            // tient compte de la vague
+                            degats = degatsBase;
                         }
 
+                        if (enemyHp.ContainsKey(e))
+                        {
+                            enemyHp[e] -= degats;
+                            if (enemyHp[e] <= 0)
+                            {
+                                enemyHp.Remove(e);
+                                ZoneJeu.Children.Remove(e);
+                                enemies.RemoveAt(j);
+                                enemieSurLeTerrain--;
+
+                                score += (int)degats;  // récompense
+                            }
+                        }
+
+                        // le projectile disparaît à l'impact
                         ZoneJeu.Children.Remove(p);
-                        ZoneJeu.Children.Remove(e);
                         projectiles.RemoveAt(i);
-                        enemies.RemoveAt(j);
-                        enemieSurLeTerrain--;
                         break;
                     }
                 }
