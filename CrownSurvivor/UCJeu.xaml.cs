@@ -176,10 +176,10 @@ namespace CrownSurvivor
                 ticks = 0;
                 secondes++;
 
-                if (secondes % 2 == 0)
+                if (secondes % 1 == 0)
                     SpawnEnemy();
 
-                if (secondes % 20 == 0)
+                if (secondes % 15 == 0)
                 {
                     limiteEnemie++;
                     enemyHpMultiplier *= 1.2;
@@ -513,8 +513,8 @@ namespace CrownSurvivor
 
         private void UpdateWaveText()
         {
-            if (txtWave != null)
-                txtWave.Text = $"Vague {wave}";
+            if (Vague != null)
+                Vague.Content = $"Vague : {wave}";
         }
     }
 }
