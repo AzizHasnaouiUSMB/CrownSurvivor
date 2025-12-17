@@ -23,5 +23,10 @@
         <Canvas x:Name="ZoneJeu">
             <Image x:Name="imgPerso" Source="/ImPerso/Im1.png" Stretch="Fill" Canvas.Left="382" Canvas.Top="198" Height="54" Width="36" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         </Canvas>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="80,12,10,10" VerticalAlignment="Top" HorizontalAlignment="Left" >
+            <TextBlock Text="HP:" Margin="0,0,5,0" Foreground="White"/>
+            <ProgressBar x:Name="HpBar" Width="150" Height="20" Minimum="0" Maximum="100" Value="100"/>
+        </StackPanel>
+        <TextBlock x:Name="txtWave" Text="Vague 1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Foreground="White" FontSize="16" />
     </Grid>
 </UserControl>

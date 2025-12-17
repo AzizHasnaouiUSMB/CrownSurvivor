@@ -16,6 +16,7 @@
     <None Remove="image\BoutonFond.png" />
     <None Remove="image\button.png" />
     <None Remove="image\camino-bosque-arboles-rocas-ilustracion-dibujos-animados_145644-83237.jpg" />
+    <None Remove="image\ImBalle.png" />
     <None Remove="image\ImZombie.png" />
     <None Remove="image\istockphoto-1077687716-612x612.jpg" />
     <None Remove="image\télécharger %281%29.png" />
@@ -48,6 +49,7 @@
     <Resource Include="image\BackgroundRegles.png" />
     <Resource Include="image\button.png" />
     <Resource Include="image\camino-bosque-arboles-rocas-ilustracion-dibujos-animados_145644-83237.jpg" />
+    <Resource Include="image\ImBalle.png" />
     <Resource Include="image\ImZombie.png" />
     <Resource Include="image\istockphoto-1077687716-612x612.jpg" />
     <Resource Include="image\télécharger (1).png" />

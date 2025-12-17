@@ -46,7 +46,6 @@ namespace CrownSurvivor
             uc.butQuitter.Click += Quitter;
             uc.butRegles.Click += AfficherRegles;
             uc.butPara.Click += AfficherPara;
-            uc.butJouer.Click += AfficherJeu;
             uc.butTirageP.Click += AfficherTirrage;
         }
 
@@ -101,15 +100,12 @@ namespace CrownSurvivor
 
         private void PasserEnPetitEcran(object sender, RoutedEventArgs e)
         {
-            
             WindowStyle = WindowStyle.SingleBorderWindow;
             WindowState = WindowState.Normal;
-
         }
 
         private void PasserEnGrandEcran(object sender, RoutedEventArgs e)
         {
-            
             WindowState = WindowState.Maximized;
             ResizeMode = ResizeMode.NoResize;
         }

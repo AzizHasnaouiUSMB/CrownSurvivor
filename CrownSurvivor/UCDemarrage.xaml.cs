@@ -28,8 +28,6 @@ namespace CrownSurvivor
         private void butPara_Click(object sender, RoutedEventArgs e)
         {
             UCRegles reglesJeuUC = new UCRegles();
-
-            //this.ConteneurDynamique.Content = reglesJeuUC; ??
         }
 
     }
